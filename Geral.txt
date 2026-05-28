@@ -1,0 +1,10 @@
+Lista de Algoritmos de Ordenação a ser usado:
+O(n²):
+Bubble Sort Aprimorado
+Selection Sort
+
+O(nlog(n)):
+Quick/Merge Sort
+Heap Sort
+
+Alternativo:
