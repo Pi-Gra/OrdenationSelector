@@ -28,6 +28,17 @@ int vector_get(Vector *v, unsigned i)
      return valor;
 }
 
+void vector_insert(Vector *v, int value, unsigned i)
+{
+    if(v == NULL){
+        printf("Falha ao inserir valor no vetor, vetor não existe");
+        return;
+    }
+
+    v->data[i] = value;
+
+}
+
 void vector_destroy(Vector *v)
 {
     if(v == NULL)

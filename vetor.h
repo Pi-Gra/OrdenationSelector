@@ -12,6 +12,7 @@ typedef struct {
 /*Define as Funções do Vetor*/
 Vector *vector_create(unsigned int tamanho);
 int vector_get(Vector *v, unsigned i);
+void vector_insert(Vector *v,int value, unsigned i);
 void vector_destroy(Vector *v);
 
 #endif
