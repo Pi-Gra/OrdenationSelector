@@ -6,5 +6,6 @@
 #include "vetor.h"
 
 void selection_sort(Vector *v);
+void bubble_sort(Vector *v);
 
 #endif
