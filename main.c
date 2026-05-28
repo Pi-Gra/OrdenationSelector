@@ -40,11 +40,14 @@ int main()
 
     printf("\n");
 
-    selection_sort(vetor);
+    merge_sort(vetor);
 
     for(i=0;i<tamanho;i++){
         printf("%d ", vector_get(vetor, i));
     }
+
+    system("pause");
+
 
     vector_destroy(vetor);
 

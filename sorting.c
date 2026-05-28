@@ -7,7 +7,7 @@ void selection_sort(Vector *v)
 {
 
     if(v==NULL){
-        printf("Erro ao ordenar o vetor, vetor não existe ou nulo");
+        printf("Erro ao ordenar o vetor. Vetor não existe ou é inválido");
         return;
     }
 
@@ -42,7 +42,7 @@ void bubble_sort(Vector *v)
 {
     
     if(v == NULL){
-        printf("Erro ao ordenar o vetor, vetor não existe ou nulo");
+        printf("Erro ao ordenar o vetor. Vetor não existe ou é inválido");
         return;
     }
 
@@ -72,5 +72,87 @@ void bubble_sort(Vector *v)
     }
 }
 
+void merge(Vector *v, Vector *u, int left, int mid, int right)
+{
+    int i = left;       // esquerda
+    int j = mid + 1;    // direita
+    int k = left;       // auxiliar
+
+    // enquanto tiver elementos nos dois lados
+    while (i <= mid && j <= right)
+    {
+        if (v->data[i] <= v->data[j])
+        {
+            u->data[k] = v->data[i];
+            i++;
+        }
+        else
+        {
+            u->data[k] = v->data[j];
+            j++;
+        }
+        k++;
+    }
+
+    // sobra da esquerda
+    while (i <= mid)
+    {
+        u->data[k] = v->data[i];
+        i++;
+        k++;
+    }
+
+    // sobra da direita
+    while (j <= right)
+    {
+        u->data[k] = v->data[j];
+        j++;
+        k++;
+    }
+
+    // copia de volta
+    for (i = left; i <= right; i++)
+    {
+        v->data[i] = u->data[i];
+    }
+}
+
+void merge_sort(Vector *v)
+{
+
+    if(v == NULL)
+    {
+        printf("Não foi possivel ordenar o vetor. Vetor não existe ou é inválido.");
+        return;
+    }
+
+    int tamanho = v->size;
+
+    //vetor auxiliar
+    Vector *u = malloc(sizeof(Vector));
+    u->size = tamanho;
+    u->data = calloc(tamanho, sizeof(int));
+
+    for(int size = 1; size <tamanho; size *= 2)
+    {
+        for(int left = 0;left<tamanho -1; left += 2* size)
+        {
+            int mid = left + size - 1;
+            int right = left + 2*size - 1;
+
+            if (mid >= tamanho)continue;
+
+            if (right >= tamanho)right = tamanho -1;
+
+            merge(v,u,left,mid,right);
+
+        }
+  
+    }
+
+    free(u->data);
+    free(u);
+
+}
 
 
