@@ -8,3 +8,8 @@ Quick/Merge Sort
 Heap Sort
 
 Alternativo:
+-----------
+
+
+Ideias:
+    Para verificar o grau de ordenação estava pensando em ir conferindo de dois em dois os itens e vendo se eles já estão ordenados entre si #pi
