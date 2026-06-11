@@ -189,14 +189,14 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
     controle.desvio_padrao = desvio_padrao(v);
     controle.percentual_desordem = percentual_desordem(v);
 
-    if(controle.percentual_desordem <= 5.0){
+    if(controle.percentual_desordem <= 20.0){
         controle.quase_ordenado = 1;
     }else{
         controle.quase_ordenado = 0;
     }
 
-    if(controle.percentual_desordem >= 95.0){
-        controle.quase_inverso = 1
+    if(controle.percentual_desordem >= 80.0){
+        controle.quase_inverso = 1;
     }else{
         controle.quase_inverso = 0;
     }
