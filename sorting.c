@@ -156,3 +156,57 @@ void merge_sort(Vector *v)
 }
 
 
+//Funcao auxiliar ao heapsort
+void heapify(Vector *v, int n, int i){
+
+    int maior = i;
+    int esq = 2*i + 1;
+    int dir = 2*i + 2;
+
+    //Se o filho esquerdo for maior que a raiz
+    if (esq < n && v->data[esq] > v->data[maior]){
+        maior = esq;
+    }
+
+    //Se o filho direito for maior que a raiz
+    if (dir < n && v->data[dir] > v->data[maior]){
+        maior = dir;
+    }
+
+    //Se o maior não for a raiz, faz a troca e continua descendo
+    if (maior != i){
+        int temp = v->data[i];
+        v->data[i] = v->data[maior];
+        v->data[maior] = temp;
+
+        heapify(v, n, maior);
+    }
+
+    return;
+}
+
+void heap_sort(Vector *v){
+
+    if (v == NULL){ 
+        printf("Não foi possível ordenar o vetor. Vetor não existe ou é inválido");
+        return; 
+    }
+
+    int n = v->size;
+    
+    for (int i = (n/2)-1; i >= 0; i--){
+        heapify(v, n, i);
+    }
+
+    for(int i = n-1; i > 0; i--){
+        int temp = v->data[0];
+        v->data[0] = v->data[i];
+        v->data[i] = temp;
+
+        heapify(v, i , 0);
+    }
+
+    return;
+}
+
+

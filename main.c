@@ -26,7 +26,7 @@ int main()
     for(i=0;i<tamanho;i++)
     {
         printf("\n");
-        printf("insira primeiro digíto: ");
+        printf("insira os digítos: ");
         fflush(stdin);
         fgets(buffer,sizeof(buffer),stdin);
         for(a=0;buffer[a]!='\0';a++)if(buffer[a]<32)buffer[a]='\0';
@@ -40,7 +40,7 @@ int main()
 
     printf("\n");
 
-    merge_sort(vetor);
+    heap_sort(vetor);
 
     for(i=0;i<tamanho;i++){
         printf("%d ", vector_get(vetor, i));
