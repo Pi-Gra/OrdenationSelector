@@ -8,7 +8,6 @@
 void selection_sort(Vector *v);
 void bubble_sort(Vector *v);
 void merge_sort(Vector *v);
-void heapify(Vector *v, int n, int i);
 void heap_sort(Vector *v);
 
 #endif
