@@ -47,15 +47,15 @@ int main()
     printf("Percentual de Desordem: %.2f%%\n", controle.percentual_desordem);
 
     if (controle.quase_ordenado == 1){
-        printf("Quase ordenado?: SIM");
+        printf("Quase ordenado?: SIM\n");
     }else{
-        printf("Quase ordenado?: NAO");
+        printf("Quase ordenado?: NAO\n");
     }
 
     if (controle.quase_inverso == 1){
-        printf("Quase inverso?: SIM");
+        printf("Quase inverso?: SIM\n");
     }else{
-        printf("Quase inverso?: NAO");
+        printf("Quase inverso?: NAO\n");
     }
 
     printf("Numero de Duplicatas: %d\n", controle.numero_duplicatas);
