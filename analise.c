@@ -195,6 +195,12 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
         controle.quase_ordenado = 0;
     }
 
+    if(controle.percentual_desordem >= 95.0){
+        controle.quase_inverso = 1
+    }else{
+        controle.quase_inverso = 0;
+    }
+
     controle.numero_duplicatas = numero_duplicatas(v);
     controle.densidade_duplicatas = densidade_duplicatas(v);
 

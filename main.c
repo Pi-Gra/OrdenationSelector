@@ -45,6 +45,19 @@ int main()
     printf("Amplitude: %d\n", controle.amplitude);
     printf("Desvio Padrao: %.2f\n", controle.desvio_padrao);
     printf("Percentual de Desordem: %.2f%%\n", controle.percentual_desordem);
+
+    if (controle.quase_ordenado == 1){
+        printf("Quase ordenado?: SIM");
+    }else{
+        printf("Quase ordenado?: NAO");
+    }
+
+    if (controle.quase_inverso == 1){
+        printf("Quase inverso?: SIM");
+    }else{
+        printf("Quase inverso?: NAO");
+    }
+
     printf("Numero de Duplicatas: %d\n", controle.numero_duplicatas);
     printf("Densidade de Duplicatas: %.2f%%\n", controle.densidade_duplicatas * 100);
 
