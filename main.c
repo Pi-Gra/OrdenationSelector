@@ -3,75 +3,83 @@
 #include <string.h>
 #include "vetor.h"
 #include "sorting.h"
-#include "analise.h"
-#define BUFFER 10
 
 
-char buffer[BUFFER];
-int tamanho,i,a;
 
-int main()
+int main(int argc,char *argv[])
 {
 
-    printf("Teste Vetor\n");
-    printf("Insira o tamanho: ");
-
-    tamanho = 0;
-    fflush(stdin);
-    fgets(buffer,sizeof(buffer),stdin);
-    for(i=0;buffer[i]!='\0';i++)if(buffer[i]<32)buffer[i]='\0';
-    tamanho = atoi(buffer);
-
-    Vector *vetor = vector_create(tamanho);
-
-    for(i=0;i<tamanho;i++)
+    if(argc < 2)
     {
-        printf("\n");
-        printf("insira os digítos: ");
-        fflush(stdin);
-        fgets(buffer,sizeof(buffer),stdin);
-        for(a=0;buffer[a]!='\0';a++)if(buffer[a]<32)buffer[a]='\0';
-        vetor->data[i] = atoi(buffer);
+        return 0;
     }
 
-    for(i=0;i<tamanho;i++){
-        printf("%d ", vector_get(vetor, i));
-    }
+    int tamanho = 0;
+    int adaptativo = 0;
+    int algoritmo;//0 = Selection Sort, 1 = Bubble Sort, 2  = Merge Sort, 3 = HeapSort
 
-    printf("\n");
 
-    CaracteristicasEntrada controle = analisar_propriedades(vetor);
-    printf("\nTamanho: %d\n", controle.tamanho);
-    printf("Amplitude: %d\n", controle.amplitude);
-    printf("Desvio Padrao: %.2f\n", controle.desvio_padrao);
-    printf("Percentual de Desordem: %.2f%%\n", controle.percentual_desordem);
+    //Aqui o tamanho ja é informado via linha de comando
+   if(argc >= 3 && strcmp(argv[argc-2], "-tamanho") == 0)tamanho = atoi(argv[argc - 1]);
+   //Aqui o tamanho não é informado e o programa precisa encontrar
+   else
+   {
 
-    if (controle.quase_ordenado == 1){
-        printf("Quase ordenado?: SIM\n");
-    }else{
-        printf("Quase ordenado?: NAO\n");
-    }
+   }
 
-    if (controle.quase_inverso == 1){
-        printf("Quase inverso?: SIM\n");
-    }else{
-        printf("Quase inverso?: NAO\n");
-    }
+   if(tamanho == 0)
+   {
+    printf("Erro vetor com tamanho nulo.");
+    system("pause");
+    return -1;
+   }
 
-    printf("Numero de Duplicatas: %d\n", controle.numero_duplicatas);
-    printf("Densidade de Duplicatas: %.2f%%\n", controle.densidade_duplicatas * 100);
+   //checa se o método adaptativo foi selecionado
 
+   if(strcmp(argv[1], "adaptativo") == 0 || strcmp(argv[1], "dados.txt") == 0 )adaptativo = 1;
+
+   //Seleciona o algoritmo de ordenação pelo modo adapativo
+   if(adaptativo == 1){
+
+   }
+
+   else
+   {
+
+    if(strcmp(argv[1],"selection") == 0)algoritmo = 0;
+    else if(strcmp(argv[1], "bubble") == 0)algoritmo = 1;
+    else if(strcmp(argv[1], "merge") == 0)algoritmo = 2;
+    else if(strcmp(argv[1], "heap") == 0)algoritmo = 3;
+
+   }
+
+   Vector *vetor = vector_create(tamanho);
+
+
+   switch(algoritmo){
+    case 0:
+    selection_sort(vetor);
+    break;
+    case 1:
+    bubble_sort(vetor);
+    break;
+    case 2:
+    merge_sort(vetor);
+    break;
+    case 3:
     heap_sort(vetor);
+    break;
+    default:
+    merge_sort(vetor);
+    break;
+   }
+   
+   vector_destroy(vetor);
 
-    for(i=0;i<tamanho;i++){
-        printf("%d ", vector_get(vetor, i));
-    }
 
-    system("pause");
 
-    vector_destroy(vetor);
 
-    system("pause");
+   return 0;
 
-    return 0;
+
 }
