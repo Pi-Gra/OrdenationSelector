@@ -204,5 +204,14 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
     controle.numero_duplicatas = numero_duplicatas(v);
     controle.densidade_duplicatas = densidade_duplicatas(v);
 
+    printf("\n ============ PROPRIEDADES DO VETOR DE ENTRADA ===========\n");
+    printf("Tamanho: %d", controle.tamanho);
+    printf("Amplitude: %d", controle.amplitude);
+    printf("Desvio Padrão: %.2f", controle.desvio_padrao);
+    printf("Percentual de Desordem: %.2f%%", controle.percentual_desordem);
+    printf("Número de Duplicatas: %d", controle.numero_duplicatas);
+    printf("Densidade de Duplicatas: %.2f", controle.densidade_duplicatas);
+    printf("\n");
+    
     return controle;
 }

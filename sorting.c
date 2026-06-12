@@ -25,14 +25,8 @@ void selection_sort(Vector *v)
 
         }
 
-        min_value = vector_get(v, min_value_index);
-        vector_insert(v, vector_get(v,valor_inicial), min_value_index);
-        vector_insert(v, min_value, valor_inicial);
+        vector_swap(v, min_value_index, valor_inicial);
         valor_inicial++;
-
-
-
-
 
     }
 
@@ -57,18 +51,13 @@ void bubble_sort(Vector *v)
         for(a=0;a<max_value -1 ;a++){
             if(vector_get(v, a + 1) < vector_get(v, a)){
                 swap = 1;
-                temp1 = vector_get(v,a+1);
-                temp2 = vector_get(v,a);
-                vector_insert(v,temp1,a);
-                vector_insert(v,temp2,a+1);
+                vector_swap(v, a, a+1);
 
             }
         }
 
         if(swap == 0)break;
         max_value--;
-
-
     }
 }
 
@@ -81,14 +70,14 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     // enquanto tiver elementos nos dois lados
     while (i <= mid && j <= right)
     {
-        if (v->data[i] <= v->data[j])
+        if (vector_get(v, i) <= vector_get(v, j))
         {
-            u->data[k] = v->data[i];
+           vector_insert(u, vector_get(v,i), k);
             i++;
         }
         else
         {
-            u->data[k] = v->data[j];
+            vector_insert(u, vector_get(v, j), k);
             j++;
         }
         k++;
@@ -97,7 +86,7 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     // sobra da esquerda
     while (i <= mid)
     {
-        u->data[k] = v->data[i];
+        vector_insert(u, vector_get(v, i), k);
         i++;
         k++;
     }
@@ -105,7 +94,7 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     // sobra da direita
     while (j <= right)
     {
-        u->data[k] = v->data[j];
+        vector_insert(u, vector_get(v, j), k);
         j++;
         k++;
     }
@@ -113,7 +102,8 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     // copia de volta
     for (i = left; i <= right; i++)
     {
-        v->data[i] = u->data[i];
+        vector_insert(v, vector_get(u, i), i);
+        v->trocas++;
     }
 }
 
@@ -129,9 +119,7 @@ void merge_sort(Vector *v)
     int tamanho = v->size;
 
     //vetor auxiliar
-    Vector *u = malloc(sizeof(Vector));
-    u->size = tamanho;
-    u->data = calloc(tamanho, sizeof(int));
+    Vector *u = vector_create(tamanho);
 
     for(int size = 1; size <tamanho; size *= 2)
     {
@@ -150,9 +138,7 @@ void merge_sort(Vector *v)
   
     }
 
-    free(u->data);
-    free(u);
-
+    vector_destroy(u);
 }
 
 
@@ -164,21 +150,18 @@ void heapify(Vector *v, int n, int i){
     int dir = 2*i + 2;
 
     //Se o filho esquerdo for maior que a raiz
-    if (esq < n && v->data[esq] > v->data[maior]){
+    if (esq < n && vector_get(v, esq) > vector_get(v, maior)){
         maior = esq;
     }
 
     //Se o filho direito for maior que a raiz
-    if (dir < n && v->data[dir] > v->data[maior]){
+    if (dir < n && vector_get(v, dir) > vector_get(v, maior)){
         maior = dir;
     }
 
     //Se o maior não for a raiz, faz a troca e continua descendo
     if (maior != i){
-        int temp = v->data[i];
-        v->data[i] = v->data[maior];
-        v->data[maior] = temp;
-
+        vector_swap(v, i, maior);
         heapify(v, n, maior);
     }
 
@@ -199,9 +182,7 @@ void heap_sort(Vector *v){
     }
 
     for(int i = n-1; i > 0; i--){
-        int temp = v->data[0];
-        v->data[0] = v->data[i];
-        v->data[i] = temp;
+        vector_swap(v, i, 0);
 
         heapify(v, i , 0);
     }
