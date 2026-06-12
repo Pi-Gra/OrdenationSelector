@@ -26,7 +26,8 @@ double percentual_desordem(Vector *v);
 double percentual_ordenacao_inversa (Vector *v);
 int numero_duplicatas(Vector *v);
 double densidade_duplicatas(Vector *v);
-
 CaracteristicasEntrada analisar_propriedades(Vector *v);
+int arvore_decisao(CaracteristicasEntrada props);
+
 
 #endif

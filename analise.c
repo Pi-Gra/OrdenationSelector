@@ -204,14 +204,19 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
     controle.numero_duplicatas = numero_duplicatas(v);
     controle.densidade_duplicatas = densidade_duplicatas(v);
 
-    printf("\n ============ PROPRIEDADES DO VETOR DE ENTRADA ===========\n");
-    printf("Tamanho: %d", controle.tamanho);
-    printf("Amplitude: %d", controle.amplitude);
-    printf("Desvio Padrão: %.2f", controle.desvio_padrao);
-    printf("Percentual de Desordem: %.2f%%", controle.percentual_desordem);
-    printf("Número de Duplicatas: %d", controle.numero_duplicatas);
-    printf("Densidade de Duplicatas: %.2f", controle.densidade_duplicatas);
-    printf("\n");
-    
+    printf("=============== Caracteristicas do vetor: ==============\n");
+        printf("Tamanho: %d\n", controle.tamanho);
+        printf("Amplitude: %d\n", controle.amplitude);
+        printf("Desvio Padrao: %.2f\n", controle.desvio_padrao);
+        printf("Percentual de Desordem: %.2f%%\n", controle.percentual_desordem);
+        printf("Quase Ordenado: %s\n", controle.quase_ordenado ? "Sim" : "Nao");
+        printf("Quase Inverso: %s\n", controle.quase_inverso ? "Sim" : "Nao");
+        printf("Numero de Duplicatas: %d\n", controle.numero_duplicatas);
+        printf("Densidade de Duplicatas: %.2f%%\n", controle.densidade_duplicatas * 100);
+
     return controle;
+}
+
+int arvore_decisao(CaracteristicasEntrada props){
+    return 0;
 }
