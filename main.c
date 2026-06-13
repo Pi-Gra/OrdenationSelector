@@ -57,7 +57,7 @@ int main(int argc,char *argv[])
     }
     int quantidade_modos = gerar_aleatorio + gerar_ordenado + gerar_inverso;
     if(quantidade_modos > 1){
-        printf("Erro: selecione apenas um modo de geração (aleatorio/ordenado/inverso)");
+        printf("Erro: selecione apenas um modo de geração (aleatorio/ordenado/inverso)\n\n");
     }
         
     if (indice_inicio_vetor_cmd == 0 && tamanho == 0 && nome_arquivo != NULL){
@@ -65,7 +65,7 @@ int main(int argc,char *argv[])
     }
 
     if(tamanho <= 0){
-        printf("Erro: vetor sem tamanho");
+        printf("Erro: vetor sem tamanho\n\n");
         return -1;
     }
 
@@ -110,22 +110,20 @@ int main(int argc,char *argv[])
     //======================== INICIO DA ORDENACAO ALGORITMO PADRAO/ALGORITMO SELECIONADO ===============================
     printf("============================== INICIO ANALISE ALGORITMO PADRAO/SELECIONADO ==============================\n");
     clock_t inicio_padrao = clock(); //inicia o clock da analise padrao
-    size_t memoria_antes_padrao = memoria_atual();
 
-    switch(algoritmo){
-        case 0: selection_sort(vetor); printf("Ordenado via Selection Sort\n"); break;
-        case 1: bubble_sort(vetor); printf("Ordenado via Bubble Sort\n"); break;
-        case 2: merge_sort(vetor); printf("Ordenado via Merge Sort\n"); break;
-        case 3: heap_sort(vetor); printf("Ordenado via Heap Sort\n"); break;
-        default: merge_sort(vetor); printf("Ordenado via Merge Sort\n"); break;
+    printf("Ordenado via %s\n", nome_algoritmo(algoritmo));
+
+      switch(algoritmo){
+        case 0: selection_sort(vetor); break;
+        case 1: bubble_sort(vetor); break;
+        case 2: merge_sort(vetor); break;
+        case 3: heap_sort(vetor); break; 
    }
 
     clock_t fim_padrao = clock(); //fim do clock de analise padrao
     double tempo_padrao = ((double)(fim_padrao - inicio_padrao))/CLOCKS_PER_SEC; //o tempo total é dado pela diferenca dos clocks (inicial e final)
 
-    size_t memoria_depois_padrao = memoria_atual();
-    size_t memoria_padrao = (memoria_depois_padrao > memoria_antes_padrao) ? 
-                        (memoria_depois_padrao - memoria_antes_padrao) : (memoria_antes_padrao - memoria_depois_padrao);
+    size_t memoria_padrao = memoria_atual();
 
 
 
@@ -143,33 +141,26 @@ int main(int argc,char *argv[])
 
     if(adaptativo){
         printf("============================== INICIO ANALISE SISTEMA ADAPTATIVO ==============================\n");
-        clock_t inicio_adaptativo = clock(); 
-        size_t memoria_antes_adaptativo = memoria_atual();
 
-        CaracteristicasEntrada  caracteristicas_vetor = analisar_propriedades(vetor_adaptativo);
-
+        CaracteristicasEntrada caracteristicas_vetor = analisar_propriedades(vetor_adaptativo);
+        
         int algoritmo_adaptativo = arvore_decisao(caracteristicas_vetor);
-
-        printf("=====> ALGORITMO SELECIONADO: ");
-
+        
+        printf("=====> ALGORITMO SELECIONADO: %s\n\n", nome_algoritmo(algoritmo_adaptativo));
+        
+        clock_t inicio_adaptativo = clock(); 
+        
         switch(algoritmo_adaptativo){
-        case 0: selection_sort(vetor_adaptativo); printf("Selection Sort\n"); break;
-        case 1: bubble_sort(vetor_adaptativo); printf("Bubble Sort\n"); break;
-        case 2: merge_sort(vetor_adaptativo); printf("Merge Sort\n"); break;
-        case 3: heap_sort(vetor_adaptativo); printf("Heap Sort\n"); break;
-        default: merge_sort(vetor_adaptativo); printf("Merge Sort\n"); break;
+            case 0: selection_sort(vetor_adaptativo); break;
+            case 1: bubble_sort(vetor_adaptativo); break;
+            case 2: merge_sort(vetor_adaptativo); break;
+            case 3: heap_sort(vetor_adaptativo); break;
         }
-
+        
         clock_t fim_adaptativo = clock();
         double tempo_adaptativo = ((double)(fim_adaptativo - inicio_adaptativo))/CLOCKS_PER_SEC;
-
-        size_t memoria_depois_adaptativo = memoria_atual();
-
-        size_t memoria_adaptativo = (memoria_depois_adaptativo > memoria_antes_adaptativo) ? 
-                        (memoria_depois_adaptativo - memoria_antes_adaptativo) : (memoria_antes_adaptativo - memoria_depois_adaptativo); 
-        //o pico de memoria adaptativo é dado pela diferenca entre os picos antes de comecar e depois de terminar o programa do sistema adaptativo
+        size_t memoria_adaptativo = memoria_atual();
         
-
         if(DEBUG){
             printf("Vetor ordenado: ");
             print_vector(vetor_adaptativo);
@@ -181,13 +172,13 @@ int main(int argc,char *argv[])
         printf("============================== FIM ANALISE SISTEMA ADAPTATIVO ==============================\n\n\n");
 
         printf("\n================ DUELO DE PERFORMANCE ================\n");
-        printf("METRICA             | MODO ADAPTATIVO       | MODO PADRAO (Merge)\n");
+        printf("METRICA             | MODO ADAPTATIVO       | MODO PADRAO \n");
         printf("------------------------------------------------------\n");
-        printf("Algoritmo Usado     | Case %d               | Case %d\n", algoritmo_adaptativo, algoritmo);
-        printf("Tempo de Execucao   | %.6f seg           | %.4f seg\n", tempo_adaptativo, tempo_padrao);
-        printf("Movimentacoes       | %lld                  | %lld\n", vetor_adaptativo->trocas, vetor->trocas);
+        printf("Algoritmo Usado     | %s            | %s\n", nome_algoritmo(algoritmo_adaptativo), nome_algoritmo(algoritmo));
+        printf("Tempo de Execucao   | %.4f seg            | %.4f seg\n", tempo_adaptativo, tempo_padrao);
+        printf("Movimentacoes       | %lld                 | %lld\n", vetor_adaptativo->trocas, vetor->trocas);
         printf("Comparacoes         | %lld                 |  %lld\n", vetor_adaptativo->comparacoes, vetor->comparacoes);
-        printf("Pico de Memoria RAM | %.2f KB             | %.2f KB\n", 
+        printf("Pico de Memoria RAM | %.2f KB            | %.2f KB\n", 
            (double)memoria_adaptativo / 1024.0, (double)memoria_padrao / 1024.0);
         printf("======================================================\n\n");
     }

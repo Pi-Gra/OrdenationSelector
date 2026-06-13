@@ -3,6 +3,16 @@
 #include "sorting.h"
 #include "vetor.h"
 
+const char *nome_algoritmo(int algoritmo){
+    switch(algoritmo){
+        case 0: return "Selectio Sort";
+        case 1: return "Bubble Sort";
+        case 2: return "Merge Sort";
+        case 3: return "Heap Sort";
+        default: return "Desconhecido";
+    }
+}
+
 void selection_sort(Vector *v)
 {
 

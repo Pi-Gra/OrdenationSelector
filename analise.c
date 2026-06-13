@@ -218,5 +218,21 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
 }
 
 int arvore_decisao(CaracteristicasEntrada props){
-    return 0;
+    if (props.tamanho <= 1000){
+        if(props.quase_ordenado){
+            return 1;
+        }else{
+            return 0;
+        }
+    }else{
+        if(props.quase_ordenado){
+            return 1;
+        }else{
+            if(props.quase_inverso){
+                return 3;
+            }else{
+                    return 2;    
+                }
+            }
+        }
 }
