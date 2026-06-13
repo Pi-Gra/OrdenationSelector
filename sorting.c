@@ -18,16 +18,23 @@ void selection_sort(Vector *v)
     unsigned int size_vector = v->size;
 
     for(i=0;i<size_vector;i++){
+        
         min_value_index = valor_inicial;
-        for(a=valor_inicial;a<size_vector;a++)
+        
+        for(a= valor_inicial + 1; a<size_vector; a++)
         {
+            v->comparacoes++;
+
             if(vector_get(v,a) <  vector_get(v, min_value_index))min_value_index = a;
 
         }
+        
+        if(min_value_index != valor_inicial){
 
-        vector_swap(v, min_value_index, valor_inicial);
+            vector_swap(v, min_value_index, valor_inicial);
+        }
+
         valor_inicial++;
-
     }
 
 }
@@ -48,11 +55,13 @@ void bubble_sort(Vector *v)
 
         int swap = 0;
 
-        for(a=0;a<max_value -1 ;a++){
+        for(a=0; a<max_value -1; a++){
+
+            v->comparacoes++;
+
             if(vector_get(v, a + 1) < vector_get(v, a)){
                 swap = 1;
                 vector_swap(v, a, a+1);
-
             }
         }
 
@@ -70,14 +79,18 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     // enquanto tiver elementos nos dois lados
     while (i <= mid && j <= right)
     {
+        v->comparacoes++;
+
         if (vector_get(v, i) <= vector_get(v, j))
         {
            vector_insert(u, vector_get(v,i), k);
+           v->trocas++;
             i++;
         }
         else
         {
             vector_insert(u, vector_get(v, j), k);
+            v->trocas++;
             j++;
         }
         k++;
@@ -87,6 +100,7 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     while (i <= mid)
     {
         vector_insert(u, vector_get(v, i), k);
+        v->trocas++;
         i++;
         k++;
     }
@@ -95,6 +109,7 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     while (j <= right)
     {
         vector_insert(u, vector_get(v, j), k);
+        v->trocas++;
         j++;
         k++;
     }
@@ -150,13 +165,21 @@ void heapify(Vector *v, int n, int i){
     int dir = 2*i + 2;
 
     //Se o filho esquerdo for maior que a raiz
-    if (esq < n && vector_get(v, esq) > vector_get(v, maior)){
-        maior = esq;
+    if (esq < n){
+        v->comparacoes++;
+        if(vector_get(v, esq) > vector_get(v, maior)){
+           maior = esq;
+       }
+
     }
 
     //Se o filho direito for maior que a raiz
-    if (dir < n && vector_get(v, dir) > vector_get(v, maior)){
-        maior = dir;
+    if (dir < n){
+        v->comparacoes++;
+        if (vector_get(v, dir) > vector_get(v, maior)){
+            maior = dir;
+        }
+
     }
 
     //Se o maior não for a raiz, faz a troca e continua descendo

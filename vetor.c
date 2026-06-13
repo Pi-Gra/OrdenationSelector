@@ -17,6 +17,7 @@ Vector *vector_create(unsigned int tamanho)
     }
 
     v->trocas = 0;
+    v->comparacoes = 0;
 
     return v;
 }

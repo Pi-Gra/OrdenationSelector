@@ -2,6 +2,6 @@
 #define MEMORIA_H
 #include <stddef.h>
 
-size_t obter_pico_memoria(void);
+size_t memoria_atual(void);
 
 #endif
