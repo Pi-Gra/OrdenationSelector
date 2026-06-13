@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include "tratamento_entradas.h"
+#define MAX_ELEMENTOS 10000000
 
 
 int *gerar_entradas_aleatorias(unsigned int tamanho){

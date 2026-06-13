@@ -61,7 +61,7 @@ int main(int argc,char *argv[])
     }
         
     if (indice_inicio_vetor_cmd == 0 && tamanho == 0 && nome_arquivo != NULL){
-        //logica de descobrir o tamanho do vetor dentro do arquivo
+        //logica de descobrir pegar o vetor de dentro do arquivo
     }
 
     if(tamanho <= 0){
@@ -175,7 +175,7 @@ int main(int argc,char *argv[])
         printf("METRICA             | MODO ADAPTATIVO       | MODO PADRAO \n");
         printf("------------------------------------------------------\n");
         printf("Algoritmo Usado     | %s            | %s\n", nome_algoritmo(algoritmo_adaptativo), nome_algoritmo(algoritmo));
-        printf("Tempo de Execucao   | %.4f seg            | %.4f seg\n", tempo_adaptativo, tempo_padrao);
+        printf("Tempo de Execucao   | %.6f seg            | %.6f seg\n", tempo_adaptativo, tempo_padrao);
         printf("Movimentacoes       | %lld                 | %lld\n", vetor_adaptativo->trocas, vetor->trocas);
         printf("Comparacoes         | %lld                 |  %lld\n", vetor_adaptativo->comparacoes, vetor->comparacoes);
         printf("Pico de Memoria RAM | %.2f KB            | %.2f KB\n", 

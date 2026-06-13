@@ -5,11 +5,11 @@
 
 const char *nome_algoritmo(int algoritmo){
     switch(algoritmo){
-        case 0: return "Selectio Sort";
-        case 1: return "Bubble Sort";
-        case 2: return "Merge Sort";
-        case 3: return "Heap Sort";
-        default: return "Desconhecido";
+        case 0: return "Selection Sort"; break;
+        case 1: return "Bubble Sort"; break;
+        case 2: return "Merge Sort"; break;
+        case 3: return "Heap Sort"; break;
+        default: return "Desconhecido"; break;
     }
 }
 
