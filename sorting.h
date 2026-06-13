@@ -6,6 +6,7 @@
 #include "vetor.h"
 
 void selection_sort(Vector *v);
+void lsd_radix_sort(Vector *v);
 void bubble_sort(Vector *v);
 void merge_sort(Vector *v);
 void heap_sort(Vector *v);

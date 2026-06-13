@@ -13,6 +13,88 @@ const char *nome_algoritmo(int algoritmo){
     }
 }
 
+
+//radix-sort versão LSD com counting-sort
+void lsd_radix_sort(Vector *v) {
+    
+    //Verificação básica de existência do vetor
+    if(v == NULL){
+        printf("Erro ao ordenar o vetor. Vetor não existe ou é inválido");
+        return;
+    }
+
+    int menor = v->data[0];
+    int maior = v->data[0];
+    for(int i = 1; i < v->size; i++){
+        if(v->data[i] > maior){
+            maior = v->data[i];
+        }
+    }
+
+    //O objetivo da variavel largura é determinar o maior tamanho de digitos entre as variaveis 
+    //para formatar todas elas com este tamanho e assim conseguir utilizar o counting sort
+    int largura = 1;
+    while (maior >= 10) {
+        maior /= 10;
+        largura++;
+    } 
+
+    //for para as iterações com cada digito indo do menos para o mais significativo
+    Vector *vetor_aux = vector_create(10); //vetor auxiliar de 0 a 9
+    Vector *vetor_ordenado = vector_create(v->size);
+    //Teoricamente esse vetor auxiliar poderia ser entre o maior e o menor digito, porém para
+    //teria que percorrer o vetor mais um vez, então no trade-off de espaço e tempo eu achei
+    //mais interessante armazenar um pouco mais de memoria ao ínves de percorrer n.
+    int valor_do_digito = 0;
+    int exponencial = 10;//para conseguir o digito de cada valor eu estou um combinação da função modulo e divisão, porém estava fazendo isso com a função pow para conseguir as potencias de 10,
+    //como isso poderia gerar um problema de processamento e prejudicar o tempo de execução criei essa variavel de exponencial para ir sendo multiplicada ou divida em cada interação
+    //e assim conseguir resgatar o digito dos valores
+    for(int digito = (largura-1); digito>=0; digito--) {
+        
+        //parte do counting sort
+        for(int contagem_auxiliar = 0; contagem_auxiliar < v->size; contagem_auxiliar++) {
+            valor_do_digito = (int)((vector_get(v, contagem_auxiliar)%exponencial)/(exponencial/10));
+            for(int acumulo_somas = valor_do_digito; acumulo_somas < 10; acumulo_somas++) {
+                vector_insert(vetor_aux, vector_get(vetor_aux, acumulo_somas)+1, acumulo_somas);
+            }
+        }
+
+        
+        //for da contagem de tras para frente para colocar os valores no indice ordenado
+        for(int contagem_reversa = ((v->size)-1); contagem_reversa>=0; contagem_reversa--) {
+            valor_do_digito = (int)((vector_get(v, contagem_reversa)%exponencial)/(exponencial/10));
+            vector_insert(vetor_ordenado, vector_get(v, contagem_reversa), (vector_get(vetor_aux, valor_do_digito)-1));
+            vector_insert(vetor_aux, vector_get(vetor_aux, valor_do_digito)-1, valor_do_digito);
+            //Eu não passei subtraindo 1 de cada posição, mas sim subtraindo 1 do indice ao colocar no vetor ordenado
+            
+            //printando o vetor para verificação
+            for(int j = 0; j<10; j++) {
+                printf("%d", vector_get(vetor_aux, j));
+            }
+            printf("\n");
+        }
+        
+        for (int p = 0; p<v->size; p++) {
+            vector_insert(v, vector_get(vetor_ordenado, p), p);
+            vector_insert(vetor_ordenado, 0, p);
+        }
+        
+        for(int k= 0; k<10; k++) {
+            vector_insert(vetor_aux, 0, k);
+        }
+        
+
+        //atualização daa variavel de exponenciação
+        exponencial *= 10;
+    
+    }
+
+    vector_destroy(vetor_aux);
+    vector_destroy(vetor_ordenado);
+    
+}
+
+
 void selection_sort(Vector *v)
 {
 
