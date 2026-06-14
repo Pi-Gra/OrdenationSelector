@@ -9,6 +9,7 @@ const char *nome_algoritmo(int algoritmo){
         case 1: return "Bubble Sort"; break;
         case 2: return "Merge Sort"; break;
         case 3: return "Heap Sort"; break;
+        case 4: return "Radix Sort"; break;
         default: return "Desconhecido"; break;
     }
 }
@@ -64,18 +65,20 @@ void lsd_radix_sort(Vector *v) {
         for(int contagem_reversa = ((v->size)-1); contagem_reversa>=0; contagem_reversa--) {
             valor_do_digito = (int)((vector_get(v, contagem_reversa)%exponencial)/(exponencial/10));
             vector_insert(vetor_ordenado, vector_get(v, contagem_reversa), (vector_get(vetor_aux, valor_do_digito)-1));
+            v->movimentacoes++;
             vector_insert(vetor_aux, vector_get(vetor_aux, valor_do_digito)-1, valor_do_digito);
             //Eu não passei subtraindo 1 de cada posição, mas sim subtraindo 1 do indice ao colocar no vetor ordenado
             
             //printando o vetor para verificação
-            for(int j = 0; j<10; j++) {
+            /* for(int j = 0; j<10; j++) {
                 printf("%d", vector_get(vetor_aux, j));
             }
-            printf("\n");
+            printf("\n");*/
         }
         
         for (int p = 0; p<v->size; p++) {
             vector_insert(v, vector_get(vetor_ordenado, p), p);
+            v->movimentacoes++;
             vector_insert(vetor_ordenado, 0, p);
         }
         
@@ -93,7 +96,6 @@ void lsd_radix_sort(Vector *v) {
     vector_destroy(vetor_ordenado);
     
 }
-
 
 void selection_sort(Vector *v)
 {
@@ -176,13 +178,13 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
         if (vector_get(v, i) <= vector_get(v, j))
         {
            vector_insert(u, vector_get(v,i), k);
-           v->trocas++;
+           v->movimentacoes++;
             i++;
         }
         else
         {
             vector_insert(u, vector_get(v, j), k);
-            v->trocas++;
+            v->movimentacoes++;
             j++;
         }
         k++;
@@ -192,7 +194,7 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     while (i <= mid)
     {
         vector_insert(u, vector_get(v, i), k);
-        v->trocas++;
+        v->movimentacoes++;
         i++;
         k++;
     }
@@ -201,7 +203,7 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     while (j <= right)
     {
         vector_insert(u, vector_get(v, j), k);
-        v->trocas++;
+        v->movimentacoes++;
         j++;
         k++;
     }
@@ -210,7 +212,7 @@ void merge(Vector *v, Vector *u, int left, int mid, int right)
     for (i = left; i <= right; i++)
     {
         vector_insert(v, vector_get(u, i), i);
-        v->trocas++;
+        v->movimentacoes++;
     }
 }
 
@@ -250,7 +252,11 @@ void merge_sort(Vector *v)
 
 
 //Funcao auxiliar ao heapsort
-void heapify(Vector *v, int n, int i){
+void heapify(Vector *v, int n, int i, int profundidade_atual){
+
+    if(profundidade_atual > v->profundidade_recursao){
+        v->profundidade_recursao = profundidade_atual;
+    }
 
     int maior = i;
     int esq = 2*i + 1;
@@ -277,7 +283,7 @@ void heapify(Vector *v, int n, int i){
     //Se o maior não for a raiz, faz a troca e continua descendo
     if (maior != i){
         vector_swap(v, i, maior);
-        heapify(v, n, maior);
+        heapify(v, n, maior, profundidade_atual + 1);
     }
 
     return;
@@ -293,13 +299,13 @@ void heap_sort(Vector *v){
     int n = v->size;
     
     for (int i = (n/2)-1; i >= 0; i--){
-        heapify(v, n, i);
+        heapify(v, n, i, 1);
     }
 
     for(int i = n-1; i > 0; i--){
         vector_swap(v, i, 0);
 
-        heapify(v, i , 0);
+        heapify(v, i , 0, 1);
     }
 
     return;

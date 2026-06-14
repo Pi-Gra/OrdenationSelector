@@ -176,6 +176,22 @@ double densidade_duplicatas(Vector *v){
     return densidade;
 }
 
+int numero_runs(Vector *v){
+    if (v == NULL){
+        return 0;
+    }
+    
+    int runs = 1;
+
+    for(int i = 0; i < v->size; i++){
+        if(v->data[i] < v->data[i-1]){
+            runs++;
+        }
+    }
+
+    return runs;
+}
+
 
 CaracteristicasEntrada analisar_propriedades(Vector *v){
     CaracteristicasEntrada controle = {0};
@@ -186,16 +202,15 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
 
     controle.tamanho = v->size;
     controle.amplitude = amplitude(v);
-    controle.desvio_padrao = desvio_padrao(v);
     controle.percentual_desordem = percentual_desordem(v);
 
-    if(controle.percentual_desordem <= 20.0){
+    if(controle.percentual_desordem <= 5.0){
         controle.quase_ordenado = 1;
     }else{
         controle.quase_ordenado = 0;
     }
 
-    if(controle.percentual_desordem >= 80.0){
+    if(controle.percentual_desordem >= 95.0){
         controle.quase_inverso = 1;
     }else{
         controle.quase_inverso = 0;
@@ -203,36 +218,44 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
 
     controle.numero_duplicatas = numero_duplicatas(v);
     controle.densidade_duplicatas = densidade_duplicatas(v);
+    controle.runs = numero_runs(v);
 
     printf("=============== Caracteristicas do vetor: ==============\n");
         printf("Tamanho: %d\n", controle.tamanho);
         printf("Amplitude: %d\n", controle.amplitude);
-        printf("Desvio Padrao: %.2f\n", controle.desvio_padrao);
+        printf("Desvio Padrao: %.2f%%\n", controle.desvio_padrao);
         printf("Percentual de Desordem: %.2f%%\n", controle.percentual_desordem);
         printf("Quase Ordenado: %s\n", controle.quase_ordenado ? "Sim" : "Nao");
         printf("Quase Inverso: %s\n", controle.quase_inverso ? "Sim" : "Nao");
         printf("Numero de Duplicatas: %d\n", controle.numero_duplicatas);
         printf("Densidade de Duplicatas: %.2f%%\n", controle.densidade_duplicatas * 100);
+        printf("Numero de runs: %d", controle.runs = numero_runs(v));
 
     return controle;
 }
 
 int arvore_decisao(CaracteristicasEntrada props){
-    if (props.tamanho <= 1000){
-        if(props.quase_ordenado){
-            return 1;
-        }else{
-            return 0;
+
+        //condicao para vetores pequenos
+        if(props.tamanho <= 1000){
+            return 0; // --> Selection Sort
         }
-    }else{
-        if(props.quase_ordenado){
-            return 1;
-        }else{
-            if(props.quase_inverso){
-                return 3;
-            }else{
-                    return 2;    
-                }
-            }
+
+        //condicao vetores quase ordenados
+        if(props.quase_ordenado == 1){
+            return 1; // --> Bubble Sort
         }
+        
+        //grau de desordem baixo, mas nao chega a ser considerado quase ordenado
+        if(props.percentual_desordem <= 15.0){
+            return 3; // --> Heap Sort
+        }
+
+        // vetor grande, totalmente bagunçado, mas os números não são astronomicamente gigantes
+        if(props.tamanho > 5000 && props.amplitude > 0 && props.amplitude < (props.tamanho * 5)){
+            return 4;
+        }
+
+        //caso base de seguranca: heap por nao consumir memoria ram extra igual o merge
+        return 2;// --> Merge Sort
 }

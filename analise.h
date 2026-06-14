@@ -16,6 +16,7 @@ typedef struct {
     int quase_inverso;
     int numero_duplicatas;
     double densidade_duplicatas;
+    int runs;
 }CaracteristicasEntrada;
 
 double calcula_media(Vector *v);
@@ -26,6 +27,7 @@ double percentual_desordem(Vector *v);
 double percentual_ordenacao_inversa (Vector *v);
 int numero_duplicatas(Vector *v);
 double densidade_duplicatas(Vector *v);
+int numero_runs(Vector *v);
 CaracteristicasEntrada analisar_propriedades(Vector *v);
 int arvore_decisao(CaracteristicasEntrada props);
 

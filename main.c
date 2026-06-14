@@ -4,11 +4,11 @@
 #include "vetor.h"
 #include "analise.h"
 #include "sorting.h"
-#include "memoria.h"
+#include "memoria_tempo.h"
 #include "tratamento_entradas.h"
 #include <time.h>
 
-#define ALGORITMO_PADRAO 2
+#define ALGORITMO_PADRAO 3
 #define DEBUG 0
 
 
@@ -26,7 +26,7 @@ int main(int argc,char *argv[])
 
     int tamanho = 0;
     int adaptativo = 0;
-    int algoritmo = ALGORITMO_PADRAO;//0 = Selection Sort, 1 = Bubble Sort, 2  = Merge Sort (algoritmo por default), 3 = HeapSort
+    int algoritmo = ALGORITMO_PADRAO; //0 = Selection Sort, 1 = Bubble Sort, 2  = Merge Sort (default), 3 = HeapSort, 4 = Radix
     int gerar_aleatorio = 0;
     int gerar_ordenado = 0;
     int gerar_inverso = 0;
@@ -53,6 +53,7 @@ int main(int argc,char *argv[])
         else if (strcmp(argv[i], "bubble") == 0) {algoritmo = 1;}
         else if (strcmp(argv[i], "merge") == 0) {algoritmo = 2;}
         else if (strcmp(argv[i], "heap") == 0) {algoritmo = 3;}
+        else if (strcmp(argv[i], "radix") == 0){algoritmo = 4;}
         else if (strstr(argv[i], ".txt") != NULL) {nome_arquivo = argv[i];}
     }
     int quantidade_modos = gerar_aleatorio + gerar_ordenado + gerar_inverso;
@@ -95,45 +96,48 @@ int main(int argc,char *argv[])
             vector_insert(vetor, valor, i);
         }
     }
-   else if(nome_arquivo != NULL){
-        //logica de carregar os dados de dentro do arquivo
-    }
     
     Vector *vetor_adaptativo = vector_copy(vetor);
 
-    if(DEBUG){
+    /* if(DEBUG){
         printf("\n\nVetor inicial: ");
         print_vector(vetor);
         printf("\n\n");
-    }
+    } */
 
     //======================== INICIO DA ORDENACAO ALGORITMO PADRAO/ALGORITMO SELECIONADO ===============================
     printf("============================== INICIO ANALISE ALGORITMO PADRAO/SELECIONADO ==============================\n");
-    clock_t inicio_padrao = clock(); //inicia o clock da analise padrao
-
+    
     printf("Ordenado via %s\n", nome_algoritmo(algoritmo));
+    
+    double inicio_padrao = obter_tempo(); //inicia o clock da analise padrao
 
       switch(algoritmo){
         case 0: selection_sort(vetor); break;
         case 1: bubble_sort(vetor); break;
         case 2: merge_sort(vetor); break;
         case 3: heap_sort(vetor); break; 
+        case 4: lsd_radix_sort(vetor); break;
    }
 
-    clock_t fim_padrao = clock(); //fim do clock de analise padrao
-    double tempo_padrao = ((double)(fim_padrao - inicio_padrao))/CLOCKS_PER_SEC; //o tempo total é dado pela diferenca dos clocks (inicial e final)
+    double fim_padrao = obter_tempo(); //fim do clock de analise padrao
+    double tempo_padrao = fim_padrao - inicio_padrao; //o tempo total é dado pela diferenca dos clocks (inicial e final)
 
     size_t memoria_padrao = memoria_atual();
 
 
 
     if (DEBUG && !adaptativo){ 
-        printf("Vetor ordenado: ");
-        print_vector(vetor);
-        printf("\n");
+        if(tamanho < 50){
+            printf("Vetor ordenado: ");
+            print_vector(vetor);
+            printf("\n");
+        }
     }
-    printf("Numero de trocas: %ld\n", vetor->trocas);
-    printf("Tempo de execucao do algoritmo selecionado: %.06f s\n\n", tempo_padrao);
+    printf("Numero de movimentacoes: %ld\n", vetor->movimentacoes);
+    printf("Numero de comparacoes: %ld\n", vetor-> comparacoes);
+    printf("Profundidade de recursao: %ld\n", vetor->profundidade_recursao);
+    printf("Tempo de execucao do algoritmo selecionado: %.7f s\n\n", tempo_padrao);
 
     printf("============================== FIM ANALISE ALGORITMO PADRAO/SELECIONADO ==============================\n\n\n");
 
@@ -148,25 +152,26 @@ int main(int argc,char *argv[])
         
         printf("=====> ALGORITMO SELECIONADO: %s\n\n", nome_algoritmo(algoritmo_adaptativo));
         
-        clock_t inicio_adaptativo = clock(); 
+        double inicio_adaptativo = obter_tempo(); 
         
         switch(algoritmo_adaptativo){
             case 0: selection_sort(vetor_adaptativo); break;
             case 1: bubble_sort(vetor_adaptativo); break;
             case 2: merge_sort(vetor_adaptativo); break;
             case 3: heap_sort(vetor_adaptativo); break;
+            case 4: lsd_radix_sort(vetor_adaptativo); break;
         }
         
-        clock_t fim_adaptativo = clock();
-        double tempo_adaptativo = ((double)(fim_adaptativo - inicio_adaptativo))/CLOCKS_PER_SEC;
+        double fim_adaptativo = obter_tempo();
+        double tempo_adaptativo = fim_adaptativo - inicio_adaptativo;
         size_t memoria_adaptativo = memoria_atual();
         
         if(DEBUG){
             printf("Vetor ordenado: ");
             print_vector(vetor_adaptativo);
             printf("\n");
-            printf("Numero de trocas: %ld\n", vetor_adaptativo->trocas);
-            printf("Tempo de execucao do algoritmo selecionado: %.06f s\n\n", tempo_adaptativo);
+            printf("Numero de movimentacoes: %ld\n", vetor_adaptativo->movimentacoes);
+            printf("Tempo de execucao do algoritmo selecionado: %.10f s\n\n", tempo_adaptativo);
         }
 
         printf("============================== FIM ANALISE SISTEMA ADAPTATIVO ==============================\n\n\n");
@@ -175,11 +180,11 @@ int main(int argc,char *argv[])
         printf("METRICA             | MODO ADAPTATIVO       | MODO PADRAO \n");
         printf("------------------------------------------------------\n");
         printf("Algoritmo Usado     | %s            | %s\n", nome_algoritmo(algoritmo_adaptativo), nome_algoritmo(algoritmo));
-        printf("Tempo de Execucao   | %.6f seg            | %.6f seg\n", tempo_adaptativo, tempo_padrao);
-        printf("Movimentacoes       | %lld                 | %lld\n", vetor_adaptativo->trocas, vetor->trocas);
+        printf("Tempo de Execucao   | %.7f seg            | %.7f seg\n", tempo_adaptativo, tempo_padrao);
+        printf("Movimentacoes       | %lld                 | %lld\n", vetor_adaptativo->movimentacoes, vetor->movimentacoes);
         printf("Comparacoes         | %lld                 |  %lld\n", vetor_adaptativo->comparacoes, vetor->comparacoes);
-        printf("Pico de Memoria RAM | %.2f KB            | %.2f KB\n", 
-           (double)memoria_adaptativo / 1024.0, (double)memoria_padrao / 1024.0);
+        printf("Pico da Pilha (Recursao) | %d niveis             | %d niveis\n", vetor_adaptativo->profundidade_recursao, vetor->profundidade_recursao);
+        printf("Pico de Memoria RAM | %.2f KB            | %.2f KB\n", (double)memoria_adaptativo / 1024.0, (double)memoria_padrao / 1024.0);
         printf("======================================================\n\n");
     }
 

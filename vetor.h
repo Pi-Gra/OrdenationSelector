@@ -6,8 +6,9 @@
 typedef struct {
     int *data;
     unsigned int size;
-    long long int trocas;
+    long long int movimentacoes;
     long long int comparacoes;
+    long long int profundidade_recursao;
 } Vector;
 
 
