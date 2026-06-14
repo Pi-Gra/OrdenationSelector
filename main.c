@@ -60,9 +60,10 @@ int main(int argc,char *argv[])
     if(quantidade_modos > 1){
         printf("Erro: selecione apenas um modo de geração (aleatorio/ordenado/inverso)\n\n");
     }
-        
+
+    //pegar o tamanho pelo arquivo para conseguir criar o vetor
     if (indice_inicio_vetor_cmd == 0 && tamanho == 0 && nome_arquivo != NULL){
-        //logica de descobrir pegar o vetor de dentro do arquivo
+        tamanho = tamanho_arquivo(nome_arquivo);
     }
 
     if(tamanho <= 0){
@@ -71,6 +72,14 @@ int main(int argc,char *argv[])
     }
 
     Vector *vetor = vector_create(tamanho);
+
+    //leitura dos dados no arquivo e inserção deles no vetor
+    if(indice_inicio_vetor_cmd == 0 && nome_arquivo != NULL) {
+        int *dados = leitura_arquivos(nome_arquivo, tamanho);
+        for (int i = 0; i < tamanho; i++){
+            vector_insert(vetor, dados[i], i);
+        }
+    }
 
     if(gerar_aleatorio){
         int *dados = gerar_entradas_aleatorias(tamanho);

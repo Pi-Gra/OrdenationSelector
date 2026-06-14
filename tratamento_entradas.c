@@ -58,3 +58,65 @@ int *gerar_entradas_inversas(unsigned int tamanho){
 
     return vetor;
 }
+
+int tamanho_arquivo(const char *nome_arquivo) {
+    FILE *arq;
+    char line[100];
+    unsigned int tamanho;
+
+    arq=fopen(nome_arquivo,"rt");
+    if (arq == NULL) {
+        printf("# Error: Can not open the file");
+        exit(1);
+    }
+
+    while(fgets(line, 100, arq) != NULL) {
+        //while para pular as linhas de explicação do arquivo
+        if (line[0] == '#') {
+            break;
+        }
+    }
+    fscanf(arq, "%u", &tamanho);
+    fclose(arq);
+    tamanho = (int)tamanho;
+    return tamanho;
+}
+
+
+int *leitura_arquivos(const char *nome_arquivo, int tamanho) {
+    FILE *arq;
+    char line[100];
+    int num;
+    unsigned int indice = 0;
+
+
+    arq=fopen(nome_arquivo,"rt");
+    if (arq == NULL) {
+        printf("# Error: Can not open the file");
+        exit(1);
+    }
+
+    while(fgets(line, 100, arq) != NULL) {
+        //while para pular as linhas de explicação do arquivo
+        if (line[0] == '#') {
+            break;
+        }
+    }
+    fscanf(arq, "%d", &num);
+    
+    int *vetor = (int *) calloc(tamanho, sizeof(int));
+
+    if (vetor == NULL){
+        fclose(arq);
+        return NULL;
+    }
+
+    while(indice<tamanho && (fscanf(arq, "%d", &num) == 1)) {
+        vetor[indice] = (int)num;
+        indice++;
+    }
+
+    fclose(arq);
+
+    return vetor;
+}
