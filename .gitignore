@@ -2,3 +2,6 @@
 *.o
 *.out
 *.exe
+
+# Arquivos do S.O. desnecessários para o projeto
+*:Zone.Identifier

@@ -1,0 +1,373 @@
+RESULTADOS DOS EXPERIMENTOS - ESTRUTURAS DE DADOS II
+====================================================
+
+
+>>> EXPERIMENTO: inputs/aleatorio_1k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0005295                   |
+| Numero de Movimentacoes: 9133                        |
+| Numero de Comparacoes  : 16887                       |
+| Profundidade Recursao  : 10                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 1000                        |
+| Amplitude dos Dados    : 1019220275                  |
+| Desvio Padrao          : 268963814.87                |
+| Subvetores (Runs)      : 483                         |
+| Desordem Estimada      : 48.25                     % |
+| Duplicatas Totais      : 0                           |
+| Densidade de Duplicatas: 0.00                      % |
+| Classificacao          : Aleatorio/Misto             |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Merge Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Merge Sort                  |
+| Tempo de Execucao (s)  : 0.0004342                   |
+| Numero de Movimentacoes: 19984                       |
+| Numero de Comparacoes  : 8718                        |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 3.96                     KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Merge Sort            | Heap Sort            
+Tempo de Execucao        | 0.0004342         seg | 0.0005295         seg
+Movimentacoes            | 19984                 | 9133                 
+Comparacoes              | 8718                  | 16887                
+Pico da Pilha (Recursao) | 0              niveis | 10             niveis
+Pico de Memoria RAM      | 3.96               KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/aleatorio_100k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0760781                   |
+| Numero de Movimentacoes: 1574718                     |
+| Numero de Comparacoes  : 3019252                     |
+| Profundidade Recursao  : 17                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 100000                      |
+| Amplitude dos Dados    : 1070650128                  |
+| Desvio Padrao          : 269475551.22                |
+| Subvetores (Runs)      : 50084                       |
+| Desordem Estimada      : 50.08                     % |
+| Duplicatas Totais      : 510                         |
+| Densidade de Duplicatas: 0.51                      % |
+| Classificacao          : Aleatorio/Misto             |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Merge Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Merge Sort                  |
+| Tempo de Execucao (s)  : 0.0551218                   |
+| Numero de Movimentacoes: 3386048                     |
+| Numero de Comparacoes  : 1566742                     |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 390.68                   KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Merge Sort            | Heap Sort            
+Tempo de Execucao        | 0.0551218         seg | 0.0760781         seg
+Movimentacoes            | 3386048               | 1574718              
+Comparacoes              | 1566742               | 3019252              
+Pico da Pilha (Recursao) | 0              niveis | 17             niveis
+Pico de Memoria RAM      | 390.68             KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/inverso_100k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0843009                   |
+| Numero de Movimentacoes: 1497434                     |
+| Numero de Comparacoes  : 2926640                     |
+| Profundidade Recursao  : 17                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 100000                      |
+| Amplitude dos Dados    : 99999                       |
+| Desvio Padrao          : 28867.66                    |
+| Subvetores (Runs)      : 100000                      |
+| Desordem Estimada      : 100.00                    % |
+| Duplicatas Totais      : 0                           |
+| Densidade de Duplicatas: 0.00                      % |
+| Classificacao          : Quase Inverso               |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Radix Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Radix Sort                  |
+| Tempo de Execucao (s)  : 0.0945106                   |
+| Numero de Movimentacoes: 1200000                     |
+| Numero de Comparacoes  : 0                           |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 390.77                   KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Radix Sort            | Heap Sort            
+Tempo de Execucao        | 0.0945106         seg | 0.0843009         seg
+Movimentacoes            | 1200000               | 1497434              
+Comparacoes              | 0                     | 2926640              
+Pico da Pilha (Recursao) | 0              niveis | 17             niveis
+Pico de Memoria RAM      | 390.77             KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/quase-ordenado_100k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0909759                   |
+| Numero de Movimentacoes: 1642550                     |
+| Numero de Comparacoes  : 3103755                     |
+| Profundidade Recursao  : 17                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 100000                      |
+| Amplitude dos Dados    : 99999                       |
+| Desvio Padrao          : 28867.66                    |
+| Subvetores (Runs)      : 9065                        |
+| Desordem Estimada      : 9.06                      % |
+| Duplicatas Totais      : 0                           |
+| Densidade de Duplicatas: 0.00                      % |
+| Classificacao          : Aleatorio/Misto             |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Radix Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Radix Sort                  |
+| Tempo de Execucao (s)  : 0.0895712                   |
+| Numero de Movimentacoes: 1200000                     |
+| Numero de Comparacoes  : 0                           |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 390.77                   KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Radix Sort            | Heap Sort            
+Tempo de Execucao        | 0.0895712         seg | 0.0909759         seg
+Movimentacoes            | 1200000               | 1642550              
+Comparacoes              | 0                     | 3103755              
+Pico da Pilha (Recursao) | 0              niveis | 17             niveis
+Pico de Memoria RAM      | 390.77             KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/repetidos_100k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0815687                   |
+| Numero de Movimentacoes: 1420331                     |
+| Numero de Comparacoes  : 2766475                     |
+| Profundidade Recursao  : 17                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 100000                      |
+| Amplitude dos Dados    : 9000                        |
+| Desvio Padrao          : 2872.66                     |
+| Subvetores (Runs)      : 44819                       |
+| Desordem Estimada      : 44.82                     % |
+| Duplicatas Totais      : 99990                       |
+| Densidade de Duplicatas: 99.99                     % |
+| Classificacao          : Aleatorio/Misto             |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Radix Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Radix Sort                  |
+| Tempo de Execucao (s)  : 0.0750134                   |
+| Numero de Movimentacoes: 800000                      |
+| Numero de Comparacoes  : 0                           |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 390.77                   KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Radix Sort            | Heap Sort            
+Tempo de Execucao        | 0.0750134         seg | 0.0815687         seg
+Movimentacoes            | 800000                | 1420331              
+Comparacoes              | 0                     | 2766475              
+Pico da Pilha (Recursao) | 0              niveis | 17             niveis
+Pico de Memoria RAM      | 390.77             KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/adversarial_bubble.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0689632                   |
+| Numero de Movimentacoes: 1649513                     |
+| Numero de Comparacoes  : 3113401                     |
+| Profundidade Recursao  : 17                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 100000                      |
+| Amplitude dos Dados    : 99999                       |
+| Desvio Padrao          : 28867.66                    |
+| Subvetores (Runs)      : 2                           |
+| Desordem Estimada      : 0.00                      % |
+| Duplicatas Totais      : 0                           |
+| Densidade de Duplicatas: 0.00                      % |
+| Classificacao          : Quase Ordenado              |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Bubble Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Bubble Sort                 |
+| Tempo de Execucao (s)  : 48.3284333                  |
+| Numero de Movimentacoes: 99999                       |
+| Numero de Comparacoes  : 4999950000                  |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Bubble Sort           | Heap Sort            
+Tempo de Execucao        | 48.3284333        seg | 0.0689632         seg
+Movimentacoes            | 99999                 | 1649513              
+Comparacoes              | 4999950000            | 3113401              
+Pico da Pilha (Recursao) | 0              niveis | 17             niveis
+Pico de Memoria RAM      | 0.00               KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/adversarial_radix.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0187646                   |
+| Numero de Movimentacoes: 387727                      |
+| Numero de Comparacoes  : 832141                      |
+| Profundidade Recursao  : 17                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 100000                      |
+| Amplitude dos Dados    : 100                         |
+| Desvio Padrao          : 40.00                       |
+| Subvetores (Runs)      : 1                           |
+| Desordem Estimada      : 0.00                      % |
+| Duplicatas Totais      : 99998                       |
+| Densidade de Duplicatas: 100.00                    % |
+| Classificacao          : Quase Ordenado              |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Bubble Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Bubble Sort                 |
+| Tempo de Execucao (s)  : 0.0010149                   |
+| Numero de Movimentacoes: 0                           |
+| Numero de Comparacoes  : 99999                       |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Bubble Sort           | Heap Sort            
+Tempo de Execucao        | 0.0010149         seg | 0.0187646         seg
+Movimentacoes            | 0                     | 387727               
+Comparacoes              | 99999                 | 832141               
+Pico da Pilha (Recursao) | 0              niveis | 17             niveis
+Pico de Memoria RAM      | 0.00               KB | 0.00               KB
+======================================================
+
