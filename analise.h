@@ -5,18 +5,16 @@
 #include <stdlib.h>
 #include "vetor.h"
 
-typedef struct {
+typedef struct caracteristicasentrada{
     int tamanho;
     int amplitude;
     double desvio_padrao;
+    int runs; //subvetores ordenados
     double percentual_desordem;
-    //1 -> quase ordenado (ou 100% inverso); 0 -> nao quase ordenado
-    int quase_ordenado;
-    //1 -> quase inverso (ou 100% inverso); 0 -> nao quase inverso
-    int quase_inverso;
+    int quase_ordenado; //1 para quase ordenado (ou 100% inverso); 0 para nao quase ordenado
+    int quase_inverso; //1 para quase inverso (ou 100% inverso); 0 para nao quase inverso
     int numero_duplicatas;
     double densidade_duplicatas;
-    int runs;
 }CaracteristicasEntrada;
 
 double calcula_media(Vector *v);
@@ -27,7 +25,6 @@ double percentual_desordem(Vector *v);
 double percentual_ordenacao_inversa (Vector *v);
 int numero_duplicatas(Vector *v);
 double densidade_duplicatas(Vector *v);
-int numero_runs(Vector *v);
 CaracteristicasEntrada analisar_propriedades(Vector *v);
 int arvore_decisao(CaracteristicasEntrada props);
 

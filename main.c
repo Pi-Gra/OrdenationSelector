@@ -12,7 +12,7 @@
 #define DEBUG 0
 
 
-int main(int argc,char *argv[])
+int main(int argc, char *argv[])
 {
     srand(time(NULL));
 
@@ -108,11 +108,11 @@ int main(int argc,char *argv[])
     
     Vector *vetor_adaptativo = vector_copy(vetor);
 
-    /* if(DEBUG){
+    if(DEBUG && vetor_adaptativo->tamanho < 50){
         printf("\n\nVetor inicial: ");
         print_vector(vetor);
         printf("\n\n");
-    } */
+    }
 
     //======================== INICIO DA ORDENACAO ALGORITMO PADRAO/ALGORITMO SELECIONADO ===============================
     printf("============================== INICIO ANALISE ALGORITMO PADRAO/SELECIONADO ==============================\n");

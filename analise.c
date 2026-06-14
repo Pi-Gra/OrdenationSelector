@@ -4,7 +4,7 @@
 #include "vetor.h"
 #include <math.h>
 
-//===================== estruturas e funcoes auxiliares da tabela hash =====================
+//===================== estruturas e funcoes auxiliares da tabela hash utilizada para contar duplicatas =====================
 
 typedef struct NoHash{
     int valor;
@@ -127,21 +127,33 @@ double desvio_padrao(Vector *v){
     return desvio_padrao;
 }
 
-//ideia: contar quantas vezes v[i] > v[i+1] (inversao)
+
+//contar quantas vezes v[i] > v[i+1] (inversao)
+int numero_runs(Vector *v){
+    if (v == NULL){
+        return 0;
+    }
+    
+    int runs = 1;
+
+    for(int i = 0; i < v->tamanho; i++){
+        if(v->data[i] < v->data[i-1]){
+            runs++;
+        }
+    }
+
+    return runs;
+}
+
+
 double percentual_desordem(Vector *v){
     if (v == NULL){
         return -1.0;
     }
 
-    int inversoes = 0;
+    int runs = numero_runs(v);
 
-    for(int i = 0; i < (v->tamanho - 1); i++){
-        if(v->data[i] > v->data[i+1]){
-            inversoes++;
-        }
-    }
-
-    double percentual_desordem = ((double)inversoes/(v->tamanho - 1)) * 100.0;
+    double percentual_desordem = ((double)(runs - 1)/(v->tamanho - 1)) * 100.0;
 
     return percentual_desordem;
 }
@@ -176,21 +188,6 @@ double densidade_duplicatas(Vector *v){
     return densidade;
 }
 
-int numero_runs(Vector *v){
-    if (v == NULL){
-        return 0;
-    }
-    
-    int runs = 1;
-
-    for(int i = 0; i < v->tamanho; i++){
-        if(v->data[i] < v->data[i-1]){
-            runs++;
-        }
-    }
-
-    return runs;
-}
 
 
 CaracteristicasEntrada analisar_propriedades(Vector *v){
@@ -224,44 +221,60 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
         printf("Tamanho: %d\n", controle.tamanho);
         printf("Amplitude: %d\n", controle.amplitude);
         printf("Desvio Padrao: %.2f%%\n", controle.desvio_padrao);
+        printf("Numero de runs: %d\n", controle.runs = numero_runs(v));
         printf("Percentual de Desordem: %.2f%%\n", controle.percentual_desordem);
         printf("Quase Ordenado: %s\n", controle.quase_ordenado ? "Sim" : "Nao");
         printf("Quase Inverso: %s\n", controle.quase_inverso ? "Sim" : "Nao");
         printf("Numero de Duplicatas: %d\n", controle.numero_duplicatas);
         printf("Densidade de Duplicatas: %.2f%%\n", controle.densidade_duplicatas * 100);
-        printf("Numero de runs: %d", controle.runs = numero_runs(v));
 
     return controle;
 }
 
 int arvore_decisao(CaracteristicasEntrada props){
+    // Vetores muito pequenos
+    if (props.tamanho <= 30)
+        return 0;
 
-    // 1. PRIORIDADE MÁXIMA: Vetores lineares ou quase prontos
-    // O Bubble Sort Aprimorado faz apenas N-1 comparações se o vetor estiver ordenado.
-    if (props.quase_ordenado == 1) {
-        return 1; // Case 1: Bubble Sort
+    // Vetores quase ordenados
+    if (props.quase_ordenado)
+        return 1;
+
+    // Cenário extremamente favorável ao Radix
+    if (props.tamanho >= 5000 &&
+        props.amplitude > 0 &&
+        props.amplitude < props.tamanho * 5)
+    {
+        return 4;
     }
 
-    if (props.tamanho <= 1000) {
-        return 0; // Case 0: Selection Sort
+    // Muitas duplicatas + baixa amplitude
+    if (props.densidade_duplicatas >= 0.80 &&
+        props.amplitude < props.tamanho * 10)
+    {
+        return 4;
     }
 
-    if (props.quase_inverso == 1) {
-        return 3; // Case 3: Heap Sort
+    // Vetor muito bagunçado
+    if (props.runs > props.tamanho * 0.45 &&
+        props.percentual_desordem > 40.0)
+    {
+        return 3;
     }
 
-    if (props.densidade_duplicatas >= 0.70) {
-        return 3; // Case 3: Heap Sort
+    // Vetor quase inverso
+    if (props.quase_inverso)
+    {
+        return 2;
     }
 
-    if (props.percentual_desordem <= 15.0) {
-        return 2; // Case 2: Merge Sort
+    // Vetor com poucas runs
+    if (props.runs < props.tamanho * 0.15)
+    {
+        return 2;
     }
 
-    if (props.tamanho > 5000 && props.amplitude > 0 && props.amplitude < (props.tamanho * 5)) {
-        return 4; // Case 4: Radix Sort LSD
-    }
-
-    return 2; // Case 2: Merge Sort
+    // estratégia de fallback
+    return 2;
 }
 
