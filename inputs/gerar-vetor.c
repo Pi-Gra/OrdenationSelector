@@ -110,15 +110,23 @@ void gerar_adversarial_bubble(int n, const char* filepath, const char* desc) {
 
 /* 6. Gerador Adversarial: Radix Sort (Enganando a Amplitude) */
 void gerar_adversarial_radix(int n, const char* filepath, const char* desc) {
-    FILE *f = fopen(filepath, "w");
+    FILE f = fopen(filepath, "w");
     if (!f) return;
     escrever_cabecalho(f, desc, n);
-    
-    int *v = malloc(n * sizeof(int));
+
+    intv = malloc(n * sizeof(int));
     for (int i = 0; i < n; i++) {
-        v[i] = (i < (n * 0.8)) ? 2000000000 : 2000000100; // 80% do vetor e igual, 20% muda levemente (limite de 32bits)
+        v[i] = 1000000000 + (i % 50);
     }
-    
+
+    for (int i = 0; i < n; i++) {
+        int j = rand() % n;
+
+        int aux = v[i];
+        v[i] = v[j];
+        v[j] = aux;
+    }
+
     imprimir_vetor_arquivo(f, v, n);
     free(v);
     fclose(f);

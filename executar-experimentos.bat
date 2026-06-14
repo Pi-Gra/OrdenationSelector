@@ -28,7 +28,7 @@ echo ==================================================== >> %ARQUIVO_LOG%
 echo [3/3] Executando testes e gravando no log...
 
 :: Array simulado com os arquivos de teste
-set TESTES=inputs\aleatorio_1k.txt inputs\aleatorio_100k.txt inputs\inverso_100k.txt inputs\quase-ordenado_100k.txt inputs\repetidos_100k.txt inputs\adversarial_bubble.txt inputs\adversarial_radix.txt
+set TESTES=inputs\aleatorio_1k.txt inputs\aleatorio_10k.txt inputs\aleatorio_100k.txt inputs\aleatorio_1000k.txt inputs\aleatorio_10000k.txt inputs\inverso_100k.txt inputs\quase-ordenado_100k.txt inputs\repetidos_100k.txt inputs\adversarial_bubble.txt inputs\adversarial_radix.txt
 
 :: Roda o programa no modo adaptativo para cada arquivo
 for %%T in (%TESTES%) do (

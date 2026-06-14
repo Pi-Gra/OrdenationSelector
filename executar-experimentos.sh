@@ -29,7 +29,10 @@ echo "[3/3] Executando testes e gravando no log..."
 # Lista dos arquivos de entrada gerados anteriormente
 TESTES=(
     "inputs/aleatorio_1k.txt"
+    "inputs/aleatorio_10k.txt"
     "inputs/aleatorio_100k.txt"
+    "inputs/aleatorio_1000k.txt"
+    "inputs/aleatorio_10000k.txt"
     "inputs/inverso_100k.txt"
     "inputs/quase-ordenado_100k.txt"
     "inputs/repetidos_100k.txt"

@@ -8,7 +8,7 @@ RESULTADOS DOS EXPERIMENTOS - ESTRUTURAS DE DADOS II
 | ANALISE: ALGORITMO PADRAO / SELECIONADO              |
 +------------------------------------------------------+
 | Algoritmo Executado    : Heap Sort                   |
-| Tempo de Execucao (s)  : 0.0005295                   |
+| Tempo de Execucao (s)  : 0.0010215                   |
 | Numero de Movimentacoes: 9133                        |
 | Numero de Comparacoes  : 16887                       |
 | Profundidade Recursao  : 10                          |
@@ -35,7 +35,7 @@ RESULTADOS DOS EXPERIMENTOS - ESTRUTURAS DE DADOS II
 | ANALISE: SISTEMA ADAPTATIVO                          |
 +------------------------------------------------------+
 | Algoritmo Executado    : Merge Sort                  |
-| Tempo de Execucao (s)  : 0.0004342                   |
+| Tempo de Execucao (s)  : 0.0008703                   |
 | Numero de Movimentacoes: 19984                       |
 | Numero de Comparacoes  : 8718                        |
 | Profundidade Recursao  : 0                           |
@@ -46,11 +46,64 @@ RESULTADOS DOS EXPERIMENTOS - ESTRUTURAS DE DADOS II
 METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
 ------------------------------------------------------
 Algoritmo Usado          | Merge Sort            | Heap Sort            
-Tempo de Execucao        | 0.0004342         seg | 0.0005295         seg
+Tempo de Execucao        | 0.0008703         seg | 0.0010215         seg
 Movimentacoes            | 19984                 | 9133                 
 Comparacoes              | 8718                  | 16887                
 Pico da Pilha (Recursao) | 0              niveis | 10             niveis
 Pico de Memoria RAM      | 3.96               KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/aleatorio_10k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.0077529                   |
+| Numero de Movimentacoes: 124195                      |
+| Numero de Comparacoes  : 235422                      |
+| Profundidade Recursao  : 14                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 10000                       |
+| Amplitude dos Dados    : 1071710343                  |
+| Desvio Padrao          : 270600747.75                |
+| Subvetores (Runs)      : 4998                        |
+| Desordem Estimada      : 49.97                     % |
+| Duplicatas Totais      : 4                           |
+| Densidade de Duplicatas: 0.04                      % |
+| Classificacao          : Aleatorio/Misto             |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Merge Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Merge Sort                  |
+| Tempo de Execucao (s)  : 0.0061128                   |
+| Numero de Movimentacoes: 272672                      |
+| Numero de Comparacoes  : 123669                      |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 39.12                    KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Merge Sort            | Heap Sort            
+Tempo de Execucao        | 0.0061128         seg | 0.0077529         seg
+Movimentacoes            | 272672                | 124195               
+Comparacoes              | 123669                | 235422               
+Pico da Pilha (Recursao) | 0              niveis | 14             niveis
+Pico de Memoria RAM      | 39.12              KB | 0.00               KB
 ======================================================
 
 
@@ -61,7 +114,7 @@ Pico de Memoria RAM      | 3.96               KB | 0.00               KB
 | ANALISE: ALGORITMO PADRAO / SELECIONADO              |
 +------------------------------------------------------+
 | Algoritmo Executado    : Heap Sort                   |
-| Tempo de Execucao (s)  : 0.0760781                   |
+| Tempo de Execucao (s)  : 0.1004149                   |
 | Numero de Movimentacoes: 1574718                     |
 | Numero de Comparacoes  : 3019252                     |
 | Profundidade Recursao  : 17                          |
@@ -88,7 +141,7 @@ Pico de Memoria RAM      | 3.96               KB | 0.00               KB
 | ANALISE: SISTEMA ADAPTATIVO                          |
 +------------------------------------------------------+
 | Algoritmo Executado    : Merge Sort                  |
-| Tempo de Execucao (s)  : 0.0551218                   |
+| Tempo de Execucao (s)  : 0.0726276                   |
 | Numero de Movimentacoes: 3386048                     |
 | Numero de Comparacoes  : 1566742                     |
 | Profundidade Recursao  : 0                           |
@@ -99,11 +152,117 @@ Pico de Memoria RAM      | 3.96               KB | 0.00               KB
 METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
 ------------------------------------------------------
 Algoritmo Usado          | Merge Sort            | Heap Sort            
-Tempo de Execucao        | 0.0551218         seg | 0.0760781         seg
+Tempo de Execucao        | 0.0726276         seg | 0.1004149         seg
 Movimentacoes            | 3386048               | 1574718              
 Comparacoes              | 1566742               | 3019252              
 Pico da Pilha (Recursao) | 0              niveis | 17             niveis
 Pico de Memoria RAM      | 390.68             KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/aleatorio_1000k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 0.9493874                   |
+| Numero de Movimentacoes: 19049257                    |
+| Numero de Comparacoes  : 36794632                    |
+| Profundidade Recursao  : 20                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 1000000                     |
+| Amplitude dos Dados    : 1073480180                  |
+| Desvio Padrao          : 268619031.24                |
+| Subvetores (Runs)      : 500508                      |
+| Desordem Estimada      : 50.05                     % |
+| Duplicatas Totais      : 39367                       |
+| Densidade de Duplicatas: 3.94                      % |
+| Classificacao          : Aleatorio/Misto             |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Merge Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Merge Sort                  |
+| Tempo de Execucao (s)  : 0.7034304                   |
+| Numero de Movimentacoes: 39961216                    |
+| Numero de Comparacoes  : 18715421                    |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 3906.30                  KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Merge Sort            | Heap Sort            
+Tempo de Execucao        | 0.7034304         seg | 0.9493874         seg
+Movimentacoes            | 39961216              | 19049257             
+Comparacoes              | 18715421              | 36794632             
+Pico da Pilha (Recursao) | 0              niveis | 20             niveis
+Pico de Memoria RAM      | 3906.30            KB | 0.00               KB
+======================================================
+
+
+
+>>> EXPERIMENTO: inputs/aleatorio_10000k.txt <<<
+
++------------------------------------------------------+
+| ANALISE: ALGORITMO PADRAO / SELECIONADO              |
++------------------------------------------------------+
+| Algoritmo Executado    : Heap Sort                   |
+| Tempo de Execucao (s)  : 14.7517025                  |
+| Numero de Movimentacoes: 223834449                   |
+| Numero de Comparacoes  : 434641592                   |
+| Profundidade Recursao  : 24                          |
+| Pico de Memoria RAM    : 0.00                     KB |
++------------------------------------------------------+
+
++------------------------------------------------------+
+|              CARACTERISTICAS DA ENTRADA              |
++------------------------------------------------------+
+| Tamanho do Vetor       : 10000000                    |
+| Amplitude dos Dados    : 9999997                     |
+| Desvio Padrao          : 2886646.48                  |
+| Subvetores (Runs)      : 5000530                     |
+| Desordem Estimada      : 50.01                     % |
+| Duplicatas Totais      : 3679281                     |
+| Densidade de Duplicatas: 36.79                     % |
+| Classificacao          : Aleatorio/Misto             |
++------------------------------------------------------+
+
+=====> ALGORITMO SELECIONADO PELA HEURISTICA: Radix Sort
+
+
++------------------------------------------------------+
+| ANALISE: SISTEMA ADAPTATIVO                          |
++------------------------------------------------------+
+| Algoritmo Executado    : Radix Sort                  |
+| Tempo de Execucao (s)  : 8.9316225                   |
+| Numero de Movimentacoes: 140000000                   |
+| Numero de Comparacoes  : 0                           |
+| Profundidade Recursao  : 0                           |
+| Pico de Memoria RAM    : 39062.65                 KB |
++------------------------------------------------------+
+
+================ DUELO DE PERFORMANCE ================
+METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
+------------------------------------------------------
+Algoritmo Usado          | Radix Sort            | Heap Sort            
+Tempo de Execucao        | 8.9316225         seg | 14.7517025        seg
+Movimentacoes            | 140000000             | 223834449            
+Comparacoes              | 0                     | 434641592            
+Pico da Pilha (Recursao) | 0              niveis | 24             niveis
+Pico de Memoria RAM      | 39062.65           KB | 0.00               KB
 ======================================================
 
 
@@ -114,7 +273,7 @@ Pico de Memoria RAM      | 390.68             KB | 0.00               KB
 | ANALISE: ALGORITMO PADRAO / SELECIONADO              |
 +------------------------------------------------------+
 | Algoritmo Executado    : Heap Sort                   |
-| Tempo de Execucao (s)  : 0.0843009                   |
+| Tempo de Execucao (s)  : 0.0852999                   |
 | Numero de Movimentacoes: 1497434                     |
 | Numero de Comparacoes  : 2926640                     |
 | Profundidade Recursao  : 17                          |
@@ -141,7 +300,7 @@ Pico de Memoria RAM      | 390.68             KB | 0.00               KB
 | ANALISE: SISTEMA ADAPTATIVO                          |
 +------------------------------------------------------+
 | Algoritmo Executado    : Radix Sort                  |
-| Tempo de Execucao (s)  : 0.0945106                   |
+| Tempo de Execucao (s)  : 0.0957909                   |
 | Numero de Movimentacoes: 1200000                     |
 | Numero de Comparacoes  : 0                           |
 | Profundidade Recursao  : 0                           |
@@ -152,7 +311,7 @@ Pico de Memoria RAM      | 390.68             KB | 0.00               KB
 METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
 ------------------------------------------------------
 Algoritmo Usado          | Radix Sort            | Heap Sort            
-Tempo de Execucao        | 0.0945106         seg | 0.0843009         seg
+Tempo de Execucao        | 0.0957909         seg | 0.0852999         seg
 Movimentacoes            | 1200000               | 1497434              
 Comparacoes              | 0                     | 2926640              
 Pico da Pilha (Recursao) | 0              niveis | 17             niveis
@@ -167,7 +326,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 | ANALISE: ALGORITMO PADRAO / SELECIONADO              |
 +------------------------------------------------------+
 | Algoritmo Executado    : Heap Sort                   |
-| Tempo de Execucao (s)  : 0.0909759                   |
+| Tempo de Execucao (s)  : 0.0919233                   |
 | Numero de Movimentacoes: 1642550                     |
 | Numero de Comparacoes  : 3103755                     |
 | Profundidade Recursao  : 17                          |
@@ -194,7 +353,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 | ANALISE: SISTEMA ADAPTATIVO                          |
 +------------------------------------------------------+
 | Algoritmo Executado    : Radix Sort                  |
-| Tempo de Execucao (s)  : 0.0895712                   |
+| Tempo de Execucao (s)  : 0.0960702                   |
 | Numero de Movimentacoes: 1200000                     |
 | Numero de Comparacoes  : 0                           |
 | Profundidade Recursao  : 0                           |
@@ -205,7 +364,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
 ------------------------------------------------------
 Algoritmo Usado          | Radix Sort            | Heap Sort            
-Tempo de Execucao        | 0.0895712         seg | 0.0909759         seg
+Tempo de Execucao        | 0.0960702         seg | 0.0919233         seg
 Movimentacoes            | 1200000               | 1642550              
 Comparacoes              | 0                     | 3103755              
 Pico da Pilha (Recursao) | 0              niveis | 17             niveis
@@ -220,7 +379,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 | ANALISE: ALGORITMO PADRAO / SELECIONADO              |
 +------------------------------------------------------+
 | Algoritmo Executado    : Heap Sort                   |
-| Tempo de Execucao (s)  : 0.0815687                   |
+| Tempo de Execucao (s)  : 0.0804839                   |
 | Numero de Movimentacoes: 1420331                     |
 | Numero de Comparacoes  : 2766475                     |
 | Profundidade Recursao  : 17                          |
@@ -247,7 +406,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 | ANALISE: SISTEMA ADAPTATIVO                          |
 +------------------------------------------------------+
 | Algoritmo Executado    : Radix Sort                  |
-| Tempo de Execucao (s)  : 0.0750134                   |
+| Tempo de Execucao (s)  : 0.0751642                   |
 | Numero de Movimentacoes: 800000                      |
 | Numero de Comparacoes  : 0                           |
 | Profundidade Recursao  : 0                           |
@@ -258,7 +417,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
 ------------------------------------------------------
 Algoritmo Usado          | Radix Sort            | Heap Sort            
-Tempo de Execucao        | 0.0750134         seg | 0.0815687         seg
+Tempo de Execucao        | 0.0751642         seg | 0.0804839         seg
 Movimentacoes            | 800000                | 1420331              
 Comparacoes              | 0                     | 2766475              
 Pico da Pilha (Recursao) | 0              niveis | 17             niveis
@@ -273,7 +432,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 | ANALISE: ALGORITMO PADRAO / SELECIONADO              |
 +------------------------------------------------------+
 | Algoritmo Executado    : Heap Sort                   |
-| Tempo de Execucao (s)  : 0.0689632                   |
+| Tempo de Execucao (s)  : 0.0900478                   |
 | Numero de Movimentacoes: 1649513                     |
 | Numero de Comparacoes  : 3113401                     |
 | Profundidade Recursao  : 17                          |
@@ -300,7 +459,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 | ANALISE: SISTEMA ADAPTATIVO                          |
 +------------------------------------------------------+
 | Algoritmo Executado    : Bubble Sort                 |
-| Tempo de Execucao (s)  : 48.3284333                  |
+| Tempo de Execucao (s)  : 47.3770132                  |
 | Numero de Movimentacoes: 99999                       |
 | Numero de Comparacoes  : 4999950000                  |
 | Profundidade Recursao  : 0                           |
@@ -311,7 +470,7 @@ Pico de Memoria RAM      | 390.77             KB | 0.00               KB
 METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
 ------------------------------------------------------
 Algoritmo Usado          | Bubble Sort           | Heap Sort            
-Tempo de Execucao        | 48.3284333        seg | 0.0689632         seg
+Tempo de Execucao        | 47.3770132        seg | 0.0900478         seg
 Movimentacoes            | 99999                 | 1649513              
 Comparacoes              | 4999950000            | 3113401              
 Pico da Pilha (Recursao) | 0              niveis | 17             niveis
@@ -326,7 +485,7 @@ Pico de Memoria RAM      | 0.00               KB | 0.00               KB
 | ANALISE: ALGORITMO PADRAO / SELECIONADO              |
 +------------------------------------------------------+
 | Algoritmo Executado    : Heap Sort                   |
-| Tempo de Execucao (s)  : 0.0187646                   |
+| Tempo de Execucao (s)  : 0.0220057                   |
 | Numero de Movimentacoes: 387727                      |
 | Numero de Comparacoes  : 832141                      |
 | Profundidade Recursao  : 17                          |
@@ -353,7 +512,7 @@ Pico de Memoria RAM      | 0.00               KB | 0.00               KB
 | ANALISE: SISTEMA ADAPTATIVO                          |
 +------------------------------------------------------+
 | Algoritmo Executado    : Bubble Sort                 |
-| Tempo de Execucao (s)  : 0.0010149                   |
+| Tempo de Execucao (s)  : 0.0011784                   |
 | Numero de Movimentacoes: 0                           |
 | Numero de Comparacoes  : 99999                       |
 | Profundidade Recursao  : 0                           |
@@ -364,7 +523,7 @@ Pico de Memoria RAM      | 0.00               KB | 0.00               KB
 METRICA                  | MODO ADAPTATIVO       | MODO PADRAO 
 ------------------------------------------------------
 Algoritmo Usado          | Bubble Sort           | Heap Sort            
-Tempo de Execucao        | 0.0010149         seg | 0.0187646         seg
+Tempo de Execucao        | 0.0011784         seg | 0.0220057         seg
 Movimentacoes            | 0                     | 387727               
 Comparacoes              | 99999                 | 832141               
 Pico da Pilha (Recursao) | 0              niveis | 17             niveis
