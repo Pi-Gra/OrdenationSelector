@@ -1,5 +1,5 @@
-#ifndef MEMORIA_TEMPO_H
-#define MEMORIA_TEMPO_H
+#ifndef TEMPO_H
+#define TEMPO_H
 #include <stddef.h>
 
 size_t memoria_atual(void);

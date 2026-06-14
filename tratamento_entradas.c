@@ -17,7 +17,7 @@ int *gerar_entradas_aleatorias(unsigned int tamanho){
     }
 
     for(int i = 0; i < tamanho; i++){
-        vetor[i] = ((rand()<< 15) | rand() & 0x3FFFFFFF);
+        vetor[i] = ((rand()<< 9) | rand() & 0x3FFFFFFF);
         }
 
     return vetor;

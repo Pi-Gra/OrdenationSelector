@@ -20,6 +20,10 @@ Vector *vector_create(unsigned int tamanho)
     v->comparacoes = 0;
     v->profundidade_recursao = 0;
 
+    v->memoria_alocada = sizeof(Vector) + (tamanho * sizeof(int));
+
+    v->pico_memoria_algoritmo = 0;
+
     return v;
 }
 

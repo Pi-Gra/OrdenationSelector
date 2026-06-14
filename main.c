@@ -4,7 +4,7 @@
 #include "vetor.h"
 #include "analise.h"
 #include "sorting.h"
-#include "memoria_tempo.h"
+#include "tempo.h"
 #include "tratamento_entradas.h"
 #include <time.h>
 
@@ -123,9 +123,6 @@ int main(int argc,char *argv[])
     double fim_padrao = obter_tempo(); //fim do clock de analise padrao
     double tempo_padrao = fim_padrao - inicio_padrao; //o tempo total é dado pela diferenca dos clocks (inicial e final)
 
-    size_t memoria_padrao = memoria_atual();
-
-
 
     if (DEBUG && !adaptativo){ 
         if(tamanho < 50){
@@ -138,6 +135,7 @@ int main(int argc,char *argv[])
     printf("Numero de comparacoes: %ld\n", vetor-> comparacoes);
     printf("Profundidade de recursao: %ld\n", vetor->profundidade_recursao);
     printf("Tempo de execucao do algoritmo selecionado: %.7f s\n\n", tempo_padrao);
+    printf("Memoria utilizada: %.2f KB", vetor->pico_memoria_algoritmo/1024);
 
     printf("============================== FIM ANALISE ALGORITMO PADRAO/SELECIONADO ==============================\n\n\n");
 
@@ -164,7 +162,6 @@ int main(int argc,char *argv[])
         
         double fim_adaptativo = obter_tempo();
         double tempo_adaptativo = fim_adaptativo - inicio_adaptativo;
-        size_t memoria_adaptativo = memoria_atual();
         
         if(DEBUG){
             printf("Vetor ordenado: ");
@@ -172,6 +169,9 @@ int main(int argc,char *argv[])
             printf("\n");
             printf("Numero de movimentacoes: %ld\n", vetor_adaptativo->movimentacoes);
             printf("Tempo de execucao do algoritmo selecionado: %.10f s\n\n", tempo_adaptativo);
+             printf("Profundidade de recursao: %ld\n", vetor->profundidade_recursao);
+            printf("Tempo de execucao do algoritmo selecionado: %.7f s\n\n", tempo_adaptativo);
+            printf("Memoria utilizada: %.2f KB", vetor_adaptativo->pico_memoria_algoritmo/1024);
         }
 
         printf("============================== FIM ANALISE SISTEMA ADAPTATIVO ==============================\n\n\n");
@@ -184,7 +184,7 @@ int main(int argc,char *argv[])
         printf("Movimentacoes       | %lld                 | %lld\n", vetor_adaptativo->movimentacoes, vetor->movimentacoes);
         printf("Comparacoes         | %lld                 |  %lld\n", vetor_adaptativo->comparacoes, vetor->comparacoes);
         printf("Pico da Pilha (Recursao) | %d niveis             | %d niveis\n", vetor_adaptativo->profundidade_recursao, vetor->profundidade_recursao);
-        printf("Pico de Memoria RAM | %.2f KB            | %.2f KB\n", (double)memoria_adaptativo / 1024.0, (double)memoria_padrao / 1024.0);
+        printf("Pico de Memoria RAM | %.2f KB            | %.2f KB\n", vetor_adaptativo->pico_memoria_algoritmo / 1024.0, vetor->pico_memoria_algoritmo / 1024.0);
         printf("======================================================\n\n");
     }
 

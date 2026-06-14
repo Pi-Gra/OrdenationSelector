@@ -46,6 +46,9 @@ void lsd_radix_sort(Vector *v) {
     //Teoricamente esse vetor auxiliar poderia ser entre o maior e o menor digito, porém para
     //teria que percorrer o vetor mais um vez, então no trade-off de espaço e tempo eu achei
     //mais interessante armazenar um pouco mais de memoria ao ínves de percorrer n.
+
+    v->pico_memoria_algoritmo = vetor_aux->memoria_alocada + vetor_ordenado->memoria_alocada;   
+
     int valor_do_digito = 0;
     int exponencial = 10;//para conseguir o digito de cada valor eu estou um combinação da função modulo e divisão, porém estava fazendo isso com a função pow para conseguir as potencias de 10,
     //como isso poderia gerar um problema de processamento e prejudicar o tempo de execução criei essa variavel de exponencial para ir sendo multiplicada ou divida em cada interação
@@ -229,6 +232,8 @@ void merge_sort(Vector *v)
 
     //vetor auxiliar
     Vector *u = vector_create(tamanho);
+
+    v->pico_memoria_algoritmo = u->memoria_alocada;
 
     for(int size = 1; size <tamanho; size *= 2)
     {

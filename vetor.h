@@ -9,6 +9,8 @@ typedef struct {
     long long int movimentacoes;
     long long int comparacoes;
     long long int profundidade_recursao;
+    size_t memoria_alocada;
+    size_t pico_memoria_algoritmo;
 } Vector;
 
 
