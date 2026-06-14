@@ -213,20 +213,23 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
         controle.quase_inverso = 0;
     }
 
+    controle.desvio_padrao = desvio_padrao(v);
+    controle.runs = numero_runs(v);
     controle.numero_duplicatas = numero_duplicatas(v);
     controle.densidade_duplicatas = densidade_duplicatas(v);
-    controle.runs = numero_runs(v);
 
-    printf("=============== Caracteristicas do vetor: ==============\n");
-        printf("Tamanho: %d\n", controle.tamanho);
-        printf("Amplitude: %d\n", controle.amplitude);
-        printf("Desvio Padrao: %.2f%%\n", controle.desvio_padrao);
-        printf("Numero de runs: %d\n", controle.runs = numero_runs(v));
-        printf("Percentual de Desordem: %.2f%%\n", controle.percentual_desordem);
-        printf("Quase Ordenado: %s\n", controle.quase_ordenado ? "Sim" : "Nao");
-        printf("Quase Inverso: %s\n", controle.quase_inverso ? "Sim" : "Nao");
-        printf("Numero de Duplicatas: %d\n", controle.numero_duplicatas);
-        printf("Densidade de Duplicatas: %.2f%%\n", controle.densidade_duplicatas * 100);
+    printf("\n+------------------------------------------------------+\n");
+    printf("|              CARACTERISTICAS DA ENTRADA              |\n");
+    printf("+------------------------------------------------------+\n");
+    printf("| Tamanho do Vetor       : %-27d |\n", controle.tamanho);
+    printf("| Amplitude dos Dados    : %-27d |\n", controle.amplitude);
+    printf("| Desvio Padrao          : %-27.2f |\n", controle.desvio_padrao);
+    printf("| Subvetores (Runs)      : %-27d |\n", controle.runs);
+    printf("| Desordem Estimada      : %-26.2f%% |\n", controle.percentual_desordem);
+    printf("| Duplicatas Totais      : %-27d |\n", controle.numero_duplicatas);
+    printf("| Densidade de Duplicatas: %-26.2f%% |\n", controle.densidade_duplicatas * 100);
+    printf("| Classificacao          : %-27s |\n", controle.quase_ordenado ? "Quase Ordenado" : (controle.quase_inverso ? "Quase Inverso" : "Aleatorio/Misto"));
+    printf("+------------------------------------------------------+\n\n");
 
     return controle;
 }
@@ -255,17 +258,17 @@ int arvore_decisao(CaracteristicasEntrada props){
         return 4;
     }
 
-    // Vetor muito bagunçado
-    if (props.runs > props.tamanho * 0.45 &&
-        props.percentual_desordem > 40.0)
-    {
-        return 3;
-    }
-
     // Vetor quase inverso
     if (props.quase_inverso)
     {
         return 2;
+    }
+
+    // Vetor muito bagunçado
+    if (props.runs > props.tamanho * 0.75 &&
+        props.percentual_desordem > 75.0)
+    {
+        return 3;
     }
 
     // Vetor com poucas runs
@@ -277,4 +280,3 @@ int arvore_decisao(CaracteristicasEntrada props){
     // estratégia de fallback
     return 2;
 }
-
