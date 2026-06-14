@@ -18,3 +18,43 @@ Para compilar o código-fonte manualmente via terminal (Linux/macOS ou Windows c
 
 ```bash
 gcc -o programa *.c -lm
+```
+
+## 🚀 Parâmetros Aceitos (CLI)
+O sistema foi projetado para receber comandos de forma flexível pelo terminal. 
+
+**Modos de Operação (Escolha 1):**
+* `adaptativo`: O sistema escolhe automaticamente o algoritmo.
+* `selection`, `bubble`, `merge`, `heap`, `radix`: Força a execução de um algoritmo específico.
+
+**Formato de Entrada (Escolha 1):**
+* `-aleatorio`: Gera dados randômicos.
+* `-ordenado`: Gera dados em ordem crescente.
+* `-inverso`: Gera dados em ordem decrescente.
+* `-vetor N1 N2 ...`: Passa os elementos diretamente no terminal.
+* `arquivo.txt`: Lê os dados de um arquivo externo (o arquivo deve conter o tamanho na primeira linha válida).
+
+**Configuração de Tamanho:**
+* `-tamanho X`: Define a quantidade de elementos a serem gerados (obrigatório para os geradores internos).
+
+## 💡 Exemplos de Uso e Execução
+
+**1. Testar o Sistema Adaptativo com Vetor Aleatório:**
+```bash
+./main adaptativo -aleatorio -tamanho 10000
+```
+
+**2. Forçar a Ordenação com Heap Sort em um Vetor Inverso:**
+```bash
+./main heap -inverso -tamanho 50000
+```
+
+**3. Testar a Heurística com Dados de um Arquivo `.txt`:**
+```bash
+./main adaptativo dados.txt
+```
+
+**4. Passar um Vetor Manualmente via Terminal com Radix Sort:**
+```bash
+./main radix -vetor 9 3 12 5 8 1
+```
