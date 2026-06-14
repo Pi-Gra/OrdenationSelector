@@ -9,7 +9,7 @@ echo "=================================================="
 
 # 1. Compilação
 echo "[1/3] Compilando o projeto..."
-gcc -o main *.c -lm
+gcc -o build/main *.c -lm
 
 # Verifica se a compilação falhou
 if [ $? -ne 0 ]; then
