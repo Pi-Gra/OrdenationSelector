@@ -3,9 +3,9 @@
 
 #include <stdlib.h>
 
-typedef struct {
+typedef struct vector{
     int *data;
-    unsigned int size;
+    unsigned int tamanho;
     long long int movimentacoes;
     long long int comparacoes;
     long long int profundidade_recursao;

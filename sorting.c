@@ -26,7 +26,7 @@ void lsd_radix_sort(Vector *v) {
 
     int menor = v->data[0];
     int maior = v->data[0];
-    for(int i = 1; i < v->size; i++){
+    for(int i = 1; i < v->tamanho; i++){
         if(v->data[i] > maior){
             maior = v->data[i];
         }
@@ -42,7 +42,7 @@ void lsd_radix_sort(Vector *v) {
 
     //for para as iterações com cada digito indo do menos para o mais significativo
     Vector *vetor_aux = vector_create(10); //vetor auxiliar de 0 a 9
-    Vector *vetor_ordenado = vector_create(v->size);
+    Vector *vetor_ordenado = vector_create(v->tamanho);
     //Teoricamente esse vetor auxiliar poderia ser entre o maior e o menor digito, porém para
     //teria que percorrer o vetor mais um vez, então no trade-off de espaço e tempo eu achei
     //mais interessante armazenar um pouco mais de memoria ao ínves de percorrer n.
@@ -56,7 +56,7 @@ void lsd_radix_sort(Vector *v) {
     for(int digito = (largura-1); digito>=0; digito--) {
         
         //parte do counting sort
-        for(int contagem_auxiliar = 0; contagem_auxiliar < v->size; contagem_auxiliar++) {
+        for(int contagem_auxiliar = 0; contagem_auxiliar < v->tamanho; contagem_auxiliar++) {
             valor_do_digito = (int)((vector_get(v, contagem_auxiliar)%exponencial)/(exponencial/10));
             for(int acumulo_somas = valor_do_digito; acumulo_somas < 10; acumulo_somas++) {
                 vector_insert(vetor_aux, vector_get(vetor_aux, acumulo_somas)+1, acumulo_somas);
@@ -65,7 +65,7 @@ void lsd_radix_sort(Vector *v) {
 
         
         //for da contagem de tras para frente para colocar os valores no indice ordenado
-        for(int contagem_reversa = ((v->size)-1); contagem_reversa>=0; contagem_reversa--) {
+        for(int contagem_reversa = ((v->tamanho)-1); contagem_reversa>=0; contagem_reversa--) {
             valor_do_digito = (int)((vector_get(v, contagem_reversa)%exponencial)/(exponencial/10));
             vector_insert(vetor_ordenado, vector_get(v, contagem_reversa), (vector_get(vetor_aux, valor_do_digito)-1));
             v->movimentacoes++;
@@ -79,7 +79,7 @@ void lsd_radix_sort(Vector *v) {
             printf("\n");*/
         }
         
-        for (int p = 0; p<v->size; p++) {
+        for (int p = 0; p<v->tamanho; p++) {
             vector_insert(v, vector_get(vetor_ordenado, p), p);
             v->movimentacoes++;
             vector_insert(vetor_ordenado, 0, p);
@@ -112,7 +112,7 @@ void selection_sort(Vector *v)
 
     int valor_inicial = 0;
     int min_value,min_value_index;
-    unsigned int size_vector = v->size;
+    unsigned int size_vector = v->tamanho;
 
     for(i=0;i<size_vector;i++){
         
@@ -144,11 +144,11 @@ void bubble_sort(Vector *v)
         return;
     }
 
-    int size_vector = v->size;
-    int max_value = size_vector;
+    int tamanho_vector = v->tamanho;
+    int max_value = tamanho_vector;
     int i,a,temp1,temp2;
 
-    for(i=0;i<size_vector;i++){
+    for(i=0;i<tamanho_vector;i++){
 
         int swap = 0;
 
@@ -228,7 +228,7 @@ void merge_sort(Vector *v)
         return;
     }
 
-    int tamanho = v->size;
+    int tamanho = v->tamanho;
 
     //vetor auxiliar
     Vector *u = vector_create(tamanho);
@@ -301,7 +301,7 @@ void heap_sort(Vector *v){
         return; 
     }
 
-    int n = v->size;
+    int n = v->tamanho;
     
     for (int i = (n/2)-1; i >= 0; i--){
         heapify(v, n, i, 1);

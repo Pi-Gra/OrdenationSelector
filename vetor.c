@@ -8,7 +8,7 @@ Vector *vector_create(unsigned int tamanho)
 
     if(v == NULL)return NULL;
 
-    v->size = tamanho;
+    v->tamanho = tamanho;
     v->data = calloc(tamanho, sizeof(int));
 
     if(v->data == NULL){
@@ -29,7 +29,7 @@ Vector *vector_create(unsigned int tamanho)
 
 int vector_get(Vector *v, unsigned i)
 {
-    if (v == NULL || i >= v->size){
+    if (v == NULL || i >= v->tamanho){
         printf("Erro: indice %u fora dos limites do vetor", i);
     }
 
@@ -45,7 +45,7 @@ void vector_insert(Vector *v, int value, unsigned i)
         return;
     }
     
-    if (i >= v->size){
+    if (i >= v->tamanho){
         printf("Erro: tentativa de insercao no indice %u fora do limite do vetor", i);
     }
 
@@ -71,7 +71,7 @@ void print_vector(Vector *v){
         return;
     }
 
-    for (int i = 0; i < v->size; i++){
+    for (int i = 0; i < v->tamanho; i++){
         printf("%d ", vector_get(v, i));
     }
 
@@ -82,7 +82,7 @@ Vector *vector_copy(Vector *v){
         return v;
     }
     
-    int tamanho = v->size;
+    int tamanho = v->tamanho;
 
     Vector *u = vector_create(tamanho);
     if (u == NULL){
