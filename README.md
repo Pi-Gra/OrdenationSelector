@@ -31,7 +31,7 @@ O sistema foi construído de forma modularizada em **C**, garantindo alta coesã
 ---
 
 ## ⚙️ Instruções de Compilação
-O projeto foi desenvolvido garantindo compatibilidade com o padrão C99 e compilação nativa via GCC. Como há uso de funções matemáticas que não estão nas operações matemáticas básicas do C (`math.h`), a lincagem da biblioteca matemática é obrigatória.
+O projeto foi desenvolvido garantindo compatibilidade com o padrão C99 e compilação nativa via GCC. Como há uso de funções matemáticas que não estão nas operações básicas do C (`math.h`), a lincagem da biblioteca matemática é obrigatória.
 
 No terminal de sua preferência, execute:
 ```bash
