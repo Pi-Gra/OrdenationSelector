@@ -44,7 +44,7 @@ TESTES=(
 for TESTE in "${TESTES[@]}"; do
     echo " -> Testando: $TESTE"
     echo -e "\n\n>>> EXPERIMENTO: $TESTE <<<" >> $ARQUIVO_LOG
-    ./main adaptativo "$TESTE" >> $ARQUIVO_LOG
+    ./build/main adaptativo "$TESTE" >> $ARQUIVO_LOG
 done
 
 echo "=================================================="
