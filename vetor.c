@@ -16,8 +16,9 @@ Vector *vector_create(unsigned int tamanho)
         return NULL;
     }
 
-    v->trocas = 0;
+    v->movimentacoes = 0;
     v->comparacoes = 0;
+    v->profundidade_recursao = 0;
 
     return v;
 }
@@ -45,7 +46,7 @@ void vector_insert(Vector *v, int value, unsigned i)
     }
 
     v->data[i] = value;
-}
+}   
 
 void vector_swap(Vector *v, unsigned i, unsigned j){
     if (v == NULL){
@@ -56,7 +57,7 @@ void vector_swap(Vector *v, unsigned i, unsigned j){
     int temp = vector_get(v, i);
     vector_insert(v, v->data[j], i);
     vector_insert(v, temp, j);
-    v->trocas++;
+    v->movimentacoes++;
 
 }
 
