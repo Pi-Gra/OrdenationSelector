@@ -2,6 +2,9 @@
 *.o
 *.out
 *.exe
+* # Ignora qualquer arquivo sem extensão, mas mantém arquivos com extensão
+!*.* # Ignora arquivos e pastas ocultas, mas mantém arquivos e pastas que começam com um ponto seguido de uma letra ou número
+!*/ # Ignora arquivos e pastas ocultas, mas mantém arquivos e pastas que começam com um ponto seguido de uma letra ou número
 
 # Arquivos do S.O. desnecessários para o projeto
 *:Zone.Identifier
