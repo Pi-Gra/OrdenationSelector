@@ -236,26 +236,32 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
 
 int arvore_decisao(CaracteristicasEntrada props){
 
-        //condicao para vetores pequenos
-        if(props.tamanho <= 1000){
-            return 0; // --> Selection Sort
-        }
+    // 1. PRIORIDADE MÁXIMA: Vetores lineares ou quase prontos
+    // O Bubble Sort Aprimorado faz apenas N-1 comparações se o vetor estiver ordenado.
+    if (props.quase_ordenado == 1) {
+        return 1; // Case 1: Bubble Sort
+    }
 
-        //condicao vetores quase ordenados
-        if(props.quase_ordenado == 1){
-            return 1; // --> Bubble Sort
-        }
-        
-        //grau de desordem baixo, mas nao chega a ser considerado quase ordenado
-        if(props.percentual_desordem <= 15.0){
-            return 3; // --> Heap Sort
-        }
+    if (props.tamanho <= 1000) {
+        return 0; // Case 0: Selection Sort
+    }
 
-        // vetor grande, totalmente bagunçado, mas os números não são astronomicamente gigantes
-        if(props.tamanho > 5000 && props.amplitude > 0 && props.amplitude < (props.tamanho * 5)){
-            return 4;
-        }
+    if (props.quase_inverso == 1) {
+        return 3; // Case 3: Heap Sort
+    }
 
-        //caso base de seguranca: heap por nao consumir memoria ram extra igual o merge
-        return 2;// --> Merge Sort
+    if (props.densidade_duplicatas >= 0.70) {
+        return 3; // Case 3: Heap Sort
+    }
+
+    if (props.percentual_desordem <= 15.0) {
+        return 2; // Case 2: Merge Sort
+    }
+
+    if (props.tamanho > 5000 && props.amplitude > 0 && props.amplitude < (props.tamanho * 5)) {
+        return 4; // Case 4: Radix Sort LSD
+    }
+
+    return 2; // Case 2: Merge Sort
 }
+
