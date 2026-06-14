@@ -64,19 +64,19 @@ main adaptativo -aleatorio -tamanho 10000 # Windows
 **2. Forçar a Ordenação com Heap Sort em um Vetor Inverso:**
 ```bash
 ./main heap -inverso -tamanho 50000 # Windows
-./main heap -inverso -tamanho 50000 # Linux
+main heap -inverso -tamanho 50000 # Linux
 ```
 
 **3. Testar a Heurística com Dados de um Arquivo `.txt`:**
 ```bash
 ./main adaptativo /inputs/nome-do-arquivo.txt # Windows
-./main adaptativo /inputs/nome-do-arquivo.txt # Linux
+main adaptativo /inputs/nome-do-arquivo.txt # Linux
 ```
 
 **4. Passar um Vetor Manualmente via Terminal com Radix Sort:**
 ```bash
 ./main radix -vetor 9 3 12 5 8 1 # Windows
-./main radix -vetor 9 3 12 5 8 1 # Linux
+main radix -vetor 9 3 12 5 8 1 # Linux
 ```
 
 ## 🧪 Reprodução dos Experimentos
