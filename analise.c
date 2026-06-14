@@ -258,17 +258,17 @@ int arvore_decisao(CaracteristicasEntrada props){
         return 4;
     }
 
-    // Vetor muito bagunçado
-    if (props.runs > props.tamanho * 0.45 &&
-        props.percentual_desordem > 40.0)
-    {
-        return 3;
-    }
-
     // Vetor quase inverso
     if (props.quase_inverso)
     {
         return 2;
+    }
+
+    // Vetor muito bagunçado
+    if (props.runs > props.tamanho * 0.75 &&
+        props.percentual_desordem > 75.0)
+    {
+        return 3;
     }
 
     // Vetor com poucas runs
