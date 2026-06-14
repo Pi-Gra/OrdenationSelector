@@ -1,60 +1,94 @@
-# Sistema Adaptativo de Ordenação
+# 📊 OrdenationSelector - Sistema Adaptativo de Ordenação
 
-Trabalho Prático da disciplina de Estruturas de Dados II (SCC0606) do Instituto de Ciências Matemáticas e de Computação (ICMC) da Universidade de São Paulo (USP), Campus de São Carlos.
+Trabalho Prático da disciplina **SCC0606 - Estruturas de Dados II**.  
+*Instituto de Ciências Matemáticas e de Computação (ICMC) - Universidade de São Paulo (USP), São Carlos.*
 
-## 📋 Descrição
-O objetivo deste projeto é implementar um sistema adaptativo capaz de analisar as propriedades de um vetor de entrada (tamanho, desordem, duplicatas, etc.) e selecionar automaticamente o algoritmo de ordenação mais eficiente para aquele cenário específico.
+---
 
-## 📂 Estrutura do Projeto
-- `main.c`: Ponto de entrada, manipulação de argumentos (CLI) e execução do Duelo de Performance.
-- `analise.c` / `analise.h`: Funções de extração de métricas e Árvore de Decisão (Heurística).
-- `sorting.c` / `sorting.h`: Implementação dos 5 algoritmos de ordenação (Selection, Bubble, Merge, Heap, Radix).
-- `tratamento_entradas.c` / `tratamento_entradas.h`: Geração e análise de vetores (aleatórios, ordenados, inversos, adversariais) e leitura de arquivos.
-- `vetor.c` / `vetor.h`: Estrutura de dados principal e funções de manipulação e rastreio de métricas.
-- `tempo.c` / `tempo.h`: Funções para marcação de tempo de execução (relógio de alta precisão).
+## 📋 Descrição do Projeto
+O **OrdenationSelector** é um sistema adaptativo heurístico desenvolvido para otimizar o processo de ordenação de dados. A escolha do algoritmo ideal não depende apenas do tamanho da entrada, mas das propriedades estruturais do vetor. 
 
-## ⚙️ Compilação
-Para compilar o código-fonte manualmente via terminal (Linux/macOS ou Windows com MinGW), utilize o compilador `gcc` linkando a biblioteca matemática (`-lm`):
+Este projeto analisa estatisticamente a entrada (grau de desordem, densidade de duplicatas, quantidade de subvetores já ordenados e amplitude) e utiliza uma **Árvore de Decisão** para acionar automaticamente o algoritmo mais eficiente para o cenário específico, mitigando piores casos e otimizando o consumo de tempo e memória.
 
+Os algoritmos implementados cobrem diferentes classes de complexidade:
+* **O(n²):** Selection Sort, Bubble Sort (Otimizado com *early exit*).
+* **O(n log n):** Merge Sort, Heap Sort.
+* **Não-comparativo:** Radix Sort LSD.
+
+---
+
+## 🏗 Estrutura e Arquitetura
+O sistema foi construído de forma modularizada em **C**, garantindo alta coesão e baixo acoplamento:
+
+* 🧠 **`analise.c` / `.h`**: O núcleo de inteligência do sistema. Extrai métricas estruturais (desvio padrão, runs, amplitude) e abriga a Árvore de Decisão que mapeia as propriedades da entrada para o algoritmo ideal.
+* ⚙️ **`sorting.c` / `.h`**: O motor de algoritmos. Contém as implementações puras dos cinco métodos de ordenação abordados.
+* 📦 **`vetor.c` / `.h`**: O encapsulamento da estrutura de dados. Gerencia a alocação e realiza a telemetria em tempo real (contagem de comparações, movimentações, pico de memória RAM e profundidade de recursão).
+* 🎲 **`tratamento_entradas.c` / `.h`**: Módulo de I/O e geradores internos. Capaz de realizar parsing de arquivos externos ou gerar em tempo de execução vetores aleatórios, ordenados e reversamente ordenados.
+* ⏱️ **`tempo.c` / `.h`**: Utilitário de benchmarking de alta precisão utilizando a biblioteca `clock_gettime`.
+* 🖥️ **`main.c`**: Ponto de orquestração. Processa os argumentos via CLI, coordena a análise adaptativa e renderiza o "Duelo de Performance" comparativo.
+* 🛠️ **`gerador_entradas.c`**: Script auxiliar independente para a geração em lote das entradas físicas `.txt` (incluindo casos adversariais).
+
+---
+
+## ⚙️ Instruções de Compilação
+O projeto foi desenvolvido garantindo compatibilidade com o padrão C99 e compilação nativa via GCC. Como há uso intensivo de métricas estatísticas (`math.h`), a lincagem da biblioteca matemática é obrigatória.
+
+No terminal de sua preferência, execute:
 ```bash
-gcc -o programa *.c -lm
+gcc -o main *.c -lm
 ```
 
 ## 🚀 Parâmetros Aceitos (CLI)
-O sistema foi projetado para receber comandos de forma flexível pelo terminal. 
+A interface de linha de comando (CLI) foi projetada para permitir testes isolados e auditoria dos algoritmos de forma prática.
 
-**Modos de Operação (Escolha 1):**
-* `adaptativo`: O sistema escolhe automaticamente o algoritmo.
-* `selection`, `bubble`, `merge`, `heap`, `radix`: Força a execução de um algoritmo específico.
+**1. Seleção de Modo (Obrigatório escolher 1):**
+* `adaptativo`: Delega a escolha ao sistema inteligente.
+* `selection`, `bubble`, `merge`, `heap`, `radix`: Força a execução de um algoritmo de ordenação estático para fins de *baseline*.
 
-**Formato de Entrada (Escolha 1):**
-* `-aleatorio`: Gera dados randômicos.
-* `-ordenado`: Gera dados em ordem crescente.
-* `-inverso`: Gera dados em ordem decrescente.
-* `-vetor N1 N2 ...`: Passa os elementos diretamente no terminal.
-* `arquivo.txt`: Lê os dados de um arquivo externo (o arquivo deve conter o tamanho na primeira linha válida).
+**2. Origem dos Dados (Obrigatório escolher 1):**
+* `-aleatorio`, `-ordenado`, `-inverso`: Utiliza geradores de dados alocados diretamente em memória.
+* `-vetor N1 N2 ... N`: Inserção manual de uma sequência de inteiros diretamente no terminal.
+* `arquivo.txt`: Realiza a leitura e instanciação a partir de um arquivo de texto local.
 
-**Configuração de Tamanho:**
-* `-tamanho X`: Define a quantidade de elementos a serem gerados (obrigatório para os geradores internos).
+**3. Configuração de Tamanho:**
+* `-tamanho X`: Define a dimensão da entrada (obrigatório caso opte por usar os geradores `-aleatorio`, `-ordenado` ou `-inverso`).
 
 ## 💡 Exemplos de Uso e Execução
 
 **1. Testar o Sistema Adaptativo com Vetor Aleatório:**
 ```bash
-./main adaptativo -aleatorio -tamanho 10000
+./main adaptativo -aleatorio -tamanho 10000 # Linux
+main adaptativo -aleatorio -tamanho 10000 # Windows
 ```
 
 **2. Forçar a Ordenação com Heap Sort em um Vetor Inverso:**
 ```bash
-./main heap -inverso -tamanho 50000
+./main heap -inverso -tamanho 50000 # Windows
+./main heap -inverso -tamanho 50000 # Linux
 ```
 
 **3. Testar a Heurística com Dados de um Arquivo `.txt`:**
 ```bash
-./main adaptativo dados.txt
+./main adaptativo /inputs/nome-do-arquivo.txt # Windows
+./main adaptativo /inputs/nome-do-arquivo.txt # Linux
 ```
 
 **4. Passar um Vetor Manualmente via Terminal com Radix Sort:**
 ```bash
-./main radix -vetor 9 3 12 5 8 1
+./main radix -vetor 9 3 12 5 8 1 # Windows
+./main radix -vetor 9 3 12 5 8 1 # Linux
 ```
+
+## 🧪 Reprodução dos Experimentos
+A auditoria e reprodutibilidade científica dos dados apresentados no relatório são garantidas por meio de automação. Foram criados scripts que compilam o código, executam uma bateria de testes exaustiva (incluindo quebra de heurística via **Entradas Adversariais**) e extraem os resultados para um log tabelado.
+
+**Ambientes Linux / macOS / WSL:**
+1. Navegue até a raiz do projeto no terminal.
+2. Conceda permissão de execução: `chmod +x executar_experimentos.sh`
+3. Acione a bateria: `./executar_experimentos.sh`
+
+**Ambientes Windows (Prompt de Comando / PowerShell):**
+1. Navegue até a raiz do projeto no terminal.
+2. Acione o lote de comandos: `.\executar_experimentos.bat`
+
+Todos os painéis analíticos, tempos de execução e métricas de consumo (movimentações, pico de recursão, uso de RAM) de todas as execções serão consolidados de forma legível no arquivo gerado `resultados_experimentos.txt`.
