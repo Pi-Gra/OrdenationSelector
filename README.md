@@ -20,12 +20,12 @@ Os algoritmos implementados cobrem diferentes classes de complexidade:
 ## 🏗 Estrutura e Arquitetura
 O sistema foi construído de forma modularizada em **C**, garantindo alta coesão e baixo acoplamento:
 
-* 🧠 **`analise.c` / `.h`**: O núcleo de inteligência do sistema. Extrai métricas estruturais (desvio padrão, runs, amplitude) e abriga a Árvore de Decisão que mapeia as propriedades da entrada para o algoritmo ideal.
-* ⚙️ **`sorting.c` / `.h`**: O motor de algoritmos. Contém as implementações puras dos cinco métodos de ordenação abordados.
-* 📦 **`vetor.c` / `.h`**: O encapsulamento da estrutura de dados. Gerencia a alocação e realiza a telemetria em tempo real (contagem de comparações, movimentações, pico de memória RAM e profundidade de recursão).
-* 🎲 **`tratamento_entradas.c` / `.h`**: Módulo de I/O e geradores internos. Capaz de realizar parsing de arquivos externos ou gerar em tempo de execução vetores aleatórios, ordenados e reversamente ordenados.
+* 🧠 **`analise.c` / `.h`**: Extrai métricas estruturais (desvio padrão, runs, amplitude) e abriga a Árvore de Decisão que mapeia as propriedades da entrada para o algoritmo ideal.
+* ⚙️ **`sorting.c` / `.h`**: Contém as implementações puras dos cinco métodos de ordenação abordados.
+* 📦 **`vetor.c` / `.h`**: Gerencia a alocação e realiza a telemetria em tempo real (contagem de comparações, movimentações, pico de memória RAM e profundidade de recursão).
+* 🎲 **`tratamento_entradas.c` / `.h`**: Capaz de realizar parsing de arquivos externos ou gerar em tempo de execução vetores aleatórios, ordenados e reversamente ordenados.
 * ⏱️ **`tempo.c` / `.h`**: Utilitário de benchmarking de alta precisão utilizando a biblioteca `clock_gettime`.
-* 🖥️ **`main.c`**: Ponto de orquestração. Processa os argumentos via CLI, coordena a análise adaptativa e renderiza o "Duelo de Performance" comparativo.
+* 🖥️ **`main.c`**: Processa os argumentos via CLI, coordena a análise adaptativa e renderiza o "Duelo de Performance" comparativo.
 * 🛠️ **`gerador_entradas.c`**: Script auxiliar independente para a geração em lote das entradas físicas `.txt` (incluindo casos adversariais).
 
 ---
