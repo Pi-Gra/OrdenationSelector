@@ -78,11 +78,11 @@ double calcula_media(Vector *v){
 
     long long int soma_total = 0;
 
-    for (int i = 0; i < v->size; i++){
+    for (int i = 0; i < v->tamanho; i++){
         soma_total += v->data[i];
     }
 
-    double media = (double)soma_total/v->size;
+    double media = (double)soma_total/v->tamanho;
 
     return media;
 }
@@ -95,7 +95,7 @@ int amplitude(Vector *v){
     int menor = v->data[0];
     int maior = v->data[0];
 
-    for(int i = 1; i < v->size; i++){
+    for(int i = 1; i < v->tamanho; i++){
         if(v->data[i] > maior){
             maior = v->data[i];
         }
@@ -112,12 +112,12 @@ double desvio_padrao(Vector *v){
         return 0.0;
     }
 
-    int n = v->size;
+    int n = v->tamanho;
 
     double media = calcula_media(v);
     double soma_quadrados = 0;
 
-    for(int i = 0; i < v->size; i++){
+    for(int i = 0; i < v->tamanho; i++){
         double diferenca = v->data[i] - media;
         soma_quadrados += diferenca*diferenca;
     }
@@ -135,13 +135,13 @@ double percentual_desordem(Vector *v){
 
     int inversoes = 0;
 
-    for(int i = 0; i < (v->size - 1); i++){
+    for(int i = 0; i < (v->tamanho - 1); i++){
         if(v->data[i] > v->data[i+1]){
             inversoes++;
         }
     }
 
-    double percentual_desordem = ((double)inversoes/(v->size - 1)) * 100.0;
+    double percentual_desordem = ((double)inversoes/(v->tamanho - 1)) * 100.0;
 
     return percentual_desordem;
 }
@@ -151,15 +151,15 @@ int numero_duplicatas(Vector *v){
         return 0;
     }
 
-    TabelaHash *tabela = criar_tabela(v->size);
+    TabelaHash *tabela = criar_tabela(v->tamanho);
 
     int valores_unicos = 0;
 
-    for (int i = 0; i < v->size; i++){
+    for (int i = 0; i < v->tamanho; i++){
         valores_unicos += inserir_hash(tabela, v->data[i]);
     }
 
-    int total_valores_repetidos = v->size - valores_unicos;
+    int total_valores_repetidos = v->tamanho - valores_unicos;
     
     liberar_tabela(tabela);
 
@@ -171,7 +171,7 @@ double densidade_duplicatas(Vector *v){
         return 0;
     }
 
-    double densidade = (double)numero_duplicatas(v)/v->size;
+    double densidade = (double)numero_duplicatas(v)/v->tamanho;
 
     return densidade;
 }
@@ -183,7 +183,7 @@ int numero_runs(Vector *v){
     
     int runs = 1;
 
-    for(int i = 0; i < v->size; i++){
+    for(int i = 0; i < v->tamanho; i++){
         if(v->data[i] < v->data[i-1]){
             runs++;
         }
@@ -200,7 +200,7 @@ CaracteristicasEntrada analisar_propriedades(Vector *v){
         return controle;
     }
 
-    controle.tamanho = v->size;
+    controle.tamanho = v->tamanho;
     controle.amplitude = amplitude(v);
     controle.percentual_desordem = percentual_desordem(v);
 
